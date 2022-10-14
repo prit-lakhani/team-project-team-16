@@ -40,7 +40,7 @@ const Main = () => {
   }, []);
 
   console.log("User role :", user);
-
+  //Handling the user routing
   const handleNavigate = (page) => {
     var path = "/";
     console.log(user.role);
