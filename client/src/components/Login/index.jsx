@@ -18,7 +18,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    try { //API for authenticating the user
       const url = `${dynamicURL}/api/auth`;
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("user", JSON.stringify(res));
