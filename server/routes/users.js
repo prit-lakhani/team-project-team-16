@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../models/user");
 
-//Adding users
+
 router.post("/", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
 
 router.get("/role", async (req, res) => {
   try {
-    //
+  
     const data = await User.find();
     if (!data) {
       res.send({ message: "No user found!" });
