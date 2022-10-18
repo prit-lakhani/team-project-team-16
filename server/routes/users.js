@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../models/user");
 
+//Adding users
 router.post("/", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
