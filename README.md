@@ -19,7 +19,7 @@ Pravin's Journal
 - Node.js
 
 ### Database:
-- MySQL
+- MongoDB
 
 ### Unit Test Framework:
 - Mocha and Jmeter
