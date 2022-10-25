@@ -21,7 +21,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    try { //api for new user registration
       const url = `${dynamicURL}/api/users`;
       const { data: res } = await axios.post(url, data);
       navigate("/login");
