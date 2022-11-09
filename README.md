@@ -58,9 +58,6 @@ Pravin's Journal
 For Backend:
 NodeJs - Node.js is easily employed as a server-side proxy where it can handle a large amount of simultaneous connections in a non-blocking manner. It is especially useful for proxying different services with varying response times, or collecting data from multiple source points
 
-For Authentication:
-AWS Cognito - AWS Cognito is used to build robust authentication and authorization into applications, it aids development process from making any authentication decision which might loose application security. Everything is Verified and built using JWT infrastructure.
-
 For Frontend: 
 React and Redux : Using React to make the ui/ux development easier, making components of the application. Introduced redux into the application to manage global state of the application, redux helps applications like SPA to transfer and manage UI states from one component to another.
 
@@ -77,8 +74,7 @@ DB Design use cases to keep in mind:
 4. Airport Employees: Enable or disable one or more gates for maintenance
 5. Airport Employees: Assign baggage carousel number to arriving flights - the system should prevent conflicting assignments
 6. Display Baggage claim information will be displayed in multiple monitors in the arrival area.
-7. Booking id, room id and amenities – table for this
-8. Airline Employees: Add or update the schedule of flights belonging to their airline relevant to that airport
+7. Airline Employees: Add or update the schedule of flights belonging to their airline relevant to that airport
 
 ## Deliverables
 
