@@ -12,6 +12,7 @@ const DeparturesAirportEmp = () => {
 
   const getFlightDetails = async (req, res) => {
     try {
+        //getiing details from backend
       const response = await axios.get(`${dynamicURL}/api/flights/departures`);
       console.log("Getting data from flights api", response.data[0]);
       setFlightDetails(response.data);
@@ -22,6 +23,8 @@ const DeparturesAirportEmp = () => {
   useEffect(() => {
     getFlightDetails();
   }, []);
+
+  //checking time conflicts based on user and flight time.
   const checkTime = (userTime, flightTime) => {
     var pTime = parseInt(userTime, 10);
     if (pTime <= 0) {
@@ -82,6 +85,7 @@ const DeparturesAirportEmp = () => {
             <Table responsive bordered striped>
               <thead>
                 <tr style={{ backgroundColor: "#3bb19b7a" }}>
+                    //table for departing flight for airport employee
                   <th>ID</th>
                   <th>Airline</th>
                   <th>Departing to</th>
@@ -98,6 +102,7 @@ const DeparturesAirportEmp = () => {
                     <tr></tr>
                   ) : (
                     <tr>
+                        //Adding tables to fetch details from backend
                       <td>{formatted_id}</td>
                       <td>{flight.airline}</td>
                       <td>{flight.arriving_from}</td>
