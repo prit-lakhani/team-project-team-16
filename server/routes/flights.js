@@ -21,6 +21,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/arrivals", async (req, res) => {
+  try {
+    const data = await AddFlight.find({ flight_type: { $eq: "arriving" } });
+    res.send(data);
+  } catch (error) {
+    console.log("Error", error);
+  }
+});
+
+router.get("/departures", async (req, res) => {
+  try {
+    const data = await AddFlight.find({ flight_type: { $eq: "departing" } });
+    res.send(data);
+  } catch (error) {
+    console.log("Error", error);
+  }
+});
+
 router.get("/update/:id", async (req, res) => {
   try {
     console.log("ID", req.params.id);

@@ -73,34 +73,6 @@ function AddFlightData() {
         Add
       </Button>
 
-      {/* <span
-        style={{
-          display: "flex",
-        }}
-      > */}
-      {/* <label style={{ marginRight: "10px" }}>Flight Type: </label> */}
-      {/* <span>
-          <label style={{ marginRight: "10px" }}>Arrivals</label>
-          <input
-            type="radio"
-            name="arriving"
-            value={flightType}
-            onClick={() => setFlightType("arriving")}
-            checked={flightType == "arriving"}
-          />
-        </span>
-        <span style={{ marginLeft: "10px" }}>
-          <label style={{ marginRight: "10px" }}>Departures</label>
-          <input
-            type="radio"
-            name="departing"
-            value={flightType}
-            onClick={() => setFlightType("departing")}
-            checked={flightType == "departing"}
-          />
-        </span>
-      </span> */}
-
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>Add Flight Details</Modal.Title>
@@ -132,7 +104,7 @@ function AddFlightData() {
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
-                <Form.Label>Arriving From</Form.Label>
+                <Form.Label>Arriving From/ Departing To</Form.Label>
                 <Form.Control
                   name="arriving_from"
                   value={arriving_from}
@@ -259,7 +231,7 @@ function AddFlightData() {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <button type="submit" variant="primary">
+            <button type="submit" variant="primary" onClick={refreshPage}>
               Save Changes
             </button>
           </Modal.Footer>

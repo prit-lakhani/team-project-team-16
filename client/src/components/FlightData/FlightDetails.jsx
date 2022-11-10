@@ -32,16 +32,7 @@ const FlightDetailsTable = () => {
 
   const [getArrivals, setGetArrivals] = useState("");
 
-  useEffect(() => {
-    // setFlightType("");
-    // setAirline("");
-    // setArriving_from("");
-    // setTime("");
-    // setTerminal("");
-    // setGate("");
-    // setBag_claim("");
-    // setAction("");
-  }, [show]);
+  useEffect(() => {}, [show]);
 
   const refreshPage = () => {
     window.location.reload();
@@ -67,8 +58,6 @@ const FlightDetailsTable = () => {
         "http://localhost:8080/api/flights/update/" + obj.UpdateAirline_ID;
       const { data: res } = axios.post(url, obj);
       console.log("From handle Data :", res.message);
-      // res.send({ messasge: "Calling from edit fligths" });
-      // useNavigate("/");
     } catch (error) {
       if (
         error.response &&
@@ -137,8 +126,6 @@ const FlightDetailsTable = () => {
     }
   };
 
-  // console.log("Flights from usestate", Flights);
-
   useEffect(() => {
     getFlightDetails();
   }, []);
@@ -152,30 +139,6 @@ const FlightDetailsTable = () => {
   }, [search]);
 
   return (
-    //   <DataTable
-    //     title="Country List"
-    //     columns={columns}
-    //     data={filteredFlights}
-    //     pagination
-    //     fixedHeader
-    //     fixedHeaderScrollHeight="450px"
-    //     selectableRows
-    //     selectableRowsHighlight
-    //     highlightOnHover
-    //     actions={<Example />}
-    //     subHeader
-    //     subHeaderComponent={
-    //       <input
-    //         type="text"
-    //         placeholder="Search Here"
-    //         className="w-25 form-control"
-    //         value={search}
-    //         onChange={(e) => setSearch(e.target.value)}
-    //       />
-    //     }
-    //   />
-    //
-
     <div>
       <span
         style={{
@@ -205,6 +168,8 @@ const FlightDetailsTable = () => {
           />
         </span>
       </span>
+
+      {getArrivals == "departures" ? <Departures /> : <Arrivals />}
       {
         <Modal show={show} onHide={handleClose} animation={false}>
           <Modal.Header closeButton>
@@ -247,7 +212,7 @@ const FlightDetailsTable = () => {
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
                 >
-                  <Form.Label>Arriving From</Form.Label>
+                  <Form.Label>Arriving From/ Departing To</Form.Label>
                   <Form.Control
                     name="arriving_from"
                     value={UpdateArrivinFrom}
@@ -271,7 +236,6 @@ const FlightDetailsTable = () => {
                         checked={UpdateFlightType === "arriving"}
                         value={UpdateFlightType}
                         onClick={() => setUpdateFlightType("arriving")}
-                        // checked={UpdateFlightType == "arriving"}
                       />
                     </span>
                     <span style={{ marginLeft: "10px" }}>
@@ -281,9 +245,7 @@ const FlightDetailsTable = () => {
                         name="departing"
                         checked={UpdateFlightType === "departing"}
                         value={UpdateFlightType}
-                        // value={flightType}
                         onClick={() => setUpdateFlightType("departing")}
-                        // checked={flightType == "departing"}
                       />
                     </span>
                   </span>
@@ -433,6 +395,7 @@ const FlightDetailsTable = () => {
                       value={flight._id}
                       onClick={(e) => {
                         handleDeleteFlight(e);
+                        refreshPage();
                       }}
                     >
                       Delete
