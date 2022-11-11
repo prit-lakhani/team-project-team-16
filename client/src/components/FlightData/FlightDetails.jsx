@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import AddFlightData from "./AddFlightDetails";
 import Arrivals from "./Arrivals";
 import Departures from "./Departures";
+import GeneralUsers from "./GeneralUsers";
 const FlightDetailsTable = () => {
   const [Flights, setFlightDetails] = useState([]);
   const [search, setSearch] = useState("");
@@ -169,7 +170,7 @@ const FlightDetailsTable = () => {
         </span>
       </span>
 
-      {getArrivals == "departures" ? <Departures /> : <Arrivals />}
+      {getArrivals == "departures" ? <Departures /> : <GeneralUsers />}
       {
         <Modal show={show} onHide={handleClose} animation={false}>
           <Modal.Header closeButton>

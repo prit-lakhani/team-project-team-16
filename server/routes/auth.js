@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
     if (user.password !== req.body.password) {
       return res.status(401).send({ message: "Invalid Email or Password" });
     }
-    res.status(200).send({ message: "logged in successfully" });
+    res.status(200).send(user);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal Server Error" });

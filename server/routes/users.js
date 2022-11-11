@@ -16,4 +16,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/role", async (req, res) => {
+  try {
+    const data = await User.find();
+    if (!data) {
+      res.send({ message: "No user found!" });
+    } else {
+      res.send(data);
+    }
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 module.exports = router;
