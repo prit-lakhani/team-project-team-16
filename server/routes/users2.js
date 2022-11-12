@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
-
+//routing the user along with authentication based on the db
 router.get("/role", async (req, res) => {
   try {
   
