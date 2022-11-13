@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import AddFlightData from "./AddFlightDetails";
 import Arrivals from "./Arrivals";
 import Departures from "./Departures";
-import GeneralUsers from "./GeneralUsers";
+import GeneralUsers from "./GeneralUsers/FlightsGeneralUsers";
 const FlightDetailsTable = () => {
   const [Flights, setFlightDetails] = useState([]);
   const [search, setSearch] = useState("");
