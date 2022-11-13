@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-const GetCurrentTime = (props) => {
+const GetCurrentTime = () => {
     const [TimeViseFlights, setTimeViseFlights] = useState("All flights");
 
     var userTime = parseInt(TimeViseFlights, 10);
 
-    // props.getNewTime(TimeViseFlights);
-
+    // const getNewTimeFromMain = props.getNewTime;
+    // console.log("Time from props :", getNewTimeFromMain)
 
     const date = new Date();
 
@@ -22,7 +22,7 @@ const GetCurrentTime = (props) => {
 
     var currTime = currHour.slice(-2) + ":" + currMin.slice(-2);
     var newTime = newHour.slice(-2) + ":" + newMin.slice(-2);
-    // props.getCurrTime(currTime);
+
     return (
         <div>
             <select

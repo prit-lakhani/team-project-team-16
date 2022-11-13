@@ -5,12 +5,14 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
+import DateTimePicker from 'react-datetime-picker';
+import moment from 'moment';
 
 function AddFlightData() {
   const [flightType, setFlightType] = useState("");
   const [airline, setAirline] = useState("");
   const [arriving_from, setArriving_from] = useState("");
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState(new Date());
   const [terminal, setTerminal] = useState("");
   const [gate, setGate] = useState("");
   const [bag_claim, setBag_claim] = useState("");
@@ -26,7 +28,7 @@ function AddFlightData() {
     setFlightType("");
     setAirline("");
     setArriving_from("");
-    setTime("");
+    setTime(new Date());
     setGate("");
     setBag_claim("");
     setAction("");
@@ -41,7 +43,7 @@ function AddFlightData() {
       airline,
       arriving_from,
       flight_type: flightType,
-      time,
+      time: moment(time).format("lll"),
       gate,
       terminal,
       bag_claim,
@@ -148,15 +150,7 @@ function AddFlightData() {
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
-                <Form.Control
-                  name="time"
-                  value={time}
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                  type="string"
-                  autoFocus
-                  onChange={(e) => setTime(e.target.value)}
-                />
+                <DateTimePicker onChange={setTime} value={time} />
               </Form.Group>
               <Form.Group
                 className="mb-3"

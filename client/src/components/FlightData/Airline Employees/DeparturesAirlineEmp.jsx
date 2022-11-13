@@ -1,8 +1,10 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
 import { Table, Button, Modal, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import AddFlightData from '../AddFlightDetails';
+import AddFlightData from "../AddFlightDetails";
+import DateTimePicker from 'react-datetime-picker';
+import moment from 'moment';
 
 
 const DeparturesAirlineEmp = () => {
@@ -23,6 +25,9 @@ const DeparturesAirlineEmp = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [TimeViseFlights, setTimeViseFlights] = useState("0");
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -31,7 +36,7 @@ const DeparturesAirlineEmp = () => {
             UpdateAirline,
             UpdateArrivinFrom,
             UpdateFlightType,
-            UpdateTime,
+            UpdateTime: moment(UpdateTime).format("lll"),
             UpdateGate,
             UpdateTerminal,
             UpdateBagClaim,
@@ -67,7 +72,7 @@ const DeparturesAirlineEmp = () => {
                 setUpdateAirline(DataToBeUpdated.data.airline);
                 setUpdateArrivinFrom(DataToBeUpdated.data.arriving_from);
                 setUpdateFlightType(DataToBeUpdated.data.flight_type);
-                setUpdateTime(DataToBeUpdated.data.time);
+                setUpdateTime(moment(DataToBeUpdated.data.time, "lll").toDate());
                 setUpdateTerminal(DataToBeUpdated.data.terminal);
                 setUpdateGate(DataToBeUpdated.data.gate);
                 setUpdateBagClaim(DataToBeUpdated.data.bag_claim);
@@ -112,13 +117,57 @@ const DeparturesAirlineEmp = () => {
     };
 
     const refreshPage = () => {
-        window.location.reload();
+        window.location.reload("/departures");
+    };
+
+    const checkTime = (userTime, flightTime) => {
+        var pTime = parseInt(userTime, 10);
+        if (pTime <= 0) {
+            return true;
+        }
+        console.log("userTime :", userTime);
+
+        let now = moment();
+        console.log("Now :", now.format("HH:DD"));
+
+        let user = moment();
+        user.add(pTime, "h");
+        console.log("user :", user.format("HH:DD"));
+
+        let flight = moment(flightTime, "lll");
+        if (!flight.isValid()) {
+            return false;
+        }
+
+        console.log("flight :", flight.format("HH:DD"));
+
+        if (flight.isSameOrAfter(now) && flight.isSameOrBefore(user)) {
+            console.log("Can display these flights");
+            return true;
+        } else {
+            console.log("No flights found for this time duration");
+            return false;
+        }
     };
 
     console.log(Flights);
     {
         return (
             <div>
+                <select
+                    name="timeViseFlightRetrivals"
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                    onChange={(e) => setTimeViseFlights(e.target.value)}
+                    value={TimeViseFlights}
+                >
+                    <option>Select option to retrive flights</option>
+                    {<option label="All Flights" value="0"></option>}
+                    {<option label="Next 1 hour" value="1"></option>}
+                    {<option label="Next 2 hours" value="2"></option>}
+                    {<option label="Next 4 hours" value="4"></option>}
+                </select>
+
                 {
                     <Modal show={show} onHide={handleClose} animation={false}>
                         <Modal.Header closeButton>
@@ -207,7 +256,7 @@ const DeparturesAirlineEmp = () => {
                                         className="mb-3"
                                         controlId="exampleForm.ControlInput1"
                                     >
-                                        <Form.Control
+                                        {/* <Form.Control
                                             name="time"
                                             value={UpdateTime}
                                             className="mb-3"
@@ -215,7 +264,8 @@ const DeparturesAirlineEmp = () => {
                                             type="string"
                                             autoFocus
                                             onChange={(e) => setUpdateTime(e.target.value)}
-                                        />
+                                        /> */}
+                                        <DateTimePicker className="mb-3" onChange={setUpdateTime} value={UpdateTime} />
                                     </Form.Group>
                                     <Form.Group
                                         className="mb-3"
@@ -318,7 +368,9 @@ const DeparturesAirlineEmp = () => {
                     <tbody>
                         {Flights.map((flight) => {
                             const formatted_id = flight._id.slice(-6).toUpperCase();
-                            return (
+                            return !checkTime(TimeViseFlights, flight.time) ? (
+                                <tr></tr>
+                            ) : (
                                 <tr>
                                     {/* <td>{i}</td> */}
                                     <td>{formatted_id}</td>
@@ -362,4 +414,4 @@ const DeparturesAirlineEmp = () => {
     }
 };
 
-export default DeparturesAirlineEmp
+export default DeparturesAirlineEmp;
