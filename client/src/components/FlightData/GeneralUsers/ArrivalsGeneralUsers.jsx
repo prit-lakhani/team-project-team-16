@@ -5,11 +5,15 @@ import { Table } from "react-bootstrap";
 import Arrivals from "../Arrivals";
 import Departures from "../Departures";
 import DeparturesGeneralUsers from "./DeparturesGeneralUsers";
+import moment from "moment";
+import DateTimePicker from "react-datetime-picker";
 
 const ArrivalsGeneralUsers = () => {
     const [Flights, setFlightDetails] = useState([]);
     const [getArrivals, setGetArrivals] = useState("");
     const [filteredFlights, setFilteredFlights] = useState([]);
+    const [TimeViseFlights, setTimeViseFlights] = useState("0");
+
     const handleArrivals = () => {
         console.log("from handleArrivals");
     };
@@ -34,8 +38,52 @@ const ArrivalsGeneralUsers = () => {
         getFlightDetails();
     }, []);
 
+    const checkTime = (userTime, flightTime) => {
+        var pTime = parseInt(userTime, 10);
+        if (pTime <= 0) {
+            return true;
+        }
+        console.log("userTime :", userTime);
+
+        let now = moment();
+        console.log("Now :", now.format("HH:DD"));
+
+        let user = moment();
+        user.add(pTime, "h");
+        console.log("user :", user.format("HH:DD"));
+
+        let flight = moment(flightTime, "lll");
+        if (!flight.isValid()) {
+            return false;
+        }
+
+        console.log("flight :", flight.format("HH:DD"));
+
+        if (flight.isSameOrAfter(now) && flight.isSameOrBefore(user)) {
+            console.log("Can display these flights");
+            return true;
+        } else {
+            console.log("No flights found for this time duration");
+            return false;
+        }
+    };
+
     return (
         <div>
+            <select
+                name="timeViseFlightRetrivals"
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+                onChange={(e) => setTimeViseFlights(e.target.value)}
+                value={TimeViseFlights}
+            >
+                <option>Select option to retrive flights</option>
+                {<option label="All Flights" value="0"></option>}
+                {<option label="Next 1 hour" value="1"></option>}
+                {<option label="Next 2 hours" value="2"></option>}
+                {<option label="Next 4 hours" value="4"></option>}
+            </select>
+
             {
                 <Table responsive>
                     <thead>
@@ -56,7 +104,9 @@ const ArrivalsGeneralUsers = () => {
                     <tbody>
                         {Flights.map((flight) => {
                             const formatted_id = flight._id.slice(-6).toUpperCase();
-                            return (
+                            return !checkTime(TimeViseFlights, flight.time) ? (
+                                <tr></tr>
+                            ) : (
                                 <tr>
                                     {/* <td>{i}</td> */}
                                     <td>{formatted_id}</td>

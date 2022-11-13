@@ -2,8 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
@@ -21,8 +23,14 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(res));
       //   console.log("User details :", JSON.stringify(res));
       //   const userDetail = localStorage.getItem("user");
-      //   console.log("userDetails ", userDetail);
-      window.location = "/";
+      var path = "/";
+      if (res.role === "User") {
+        path += "user"
+      } else if (res.role === "Airline Employee") {
+        path += "employee"
+      }
+      path += "/arrivals";
+      navigate(path);
     } catch (error) {
       if (
         error.response &&
