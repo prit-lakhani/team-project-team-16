@@ -80,7 +80,7 @@ const DeparturesGeneralUsers = () => {
             {
                 <Table responsive>
                     <thead>
-                        ArrivalsGeneralUsers
+                        DeparturesGeneralUsers
                         <tr>
                             <th>ID</th>
                             <th>Airline</th>
