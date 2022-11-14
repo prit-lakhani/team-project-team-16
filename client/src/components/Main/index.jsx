@@ -61,16 +61,15 @@ const Main = () => {
         <h1>Welcome back {user.firstName}</h1>
         <p>({user.role})</p>
         <h2>Flight details...</h2>
-        <span
+
+        <button name="arrivals" onClick={() => handleNavigate("arrivals")}>Arrivals</button>
+        <button name="departures" onClick={() => handleNavigate("departures")}>Departures</button>
+        {/* <span
           style={{
             display: "flex",
           }}
-        >
-
-          <button name="arrivals" onClick={() => handleNavigate("arrivals")}>Arrivals</button>
-          <button name="departures" onClick={() => handleNavigate("departures")}>Departures</button>
-
-          <span>
+        > */}
+        {/* <span>
             <label style={{ marginRight: "10px" }}>Arrivals</label>
             <input
               type="radio"
@@ -91,7 +90,7 @@ const Main = () => {
               checked={getArrivals == "departures"}
             />
           </span>
-        </span>
+        </span> */}
 
         <button className={styles.white_btn} onClick={handleLogout}>
           Logout
