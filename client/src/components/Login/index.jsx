@@ -28,6 +28,8 @@ const Login = () => {
         path += "user"
       } else if (res.role === "Airline Employee") {
         path += "employee"
+      } else if (res.role === "Airport Employee") {
+        path += "airportemp"
       }
       path += "/arrivals";
       navigate(path);

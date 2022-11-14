@@ -9,6 +9,8 @@ import ArrivalsAirlineEmp from "../FlightData/Airline Employees/ArrivalsAirlineE
 import DeparturesAirlineEmp from "../FlightData/Airline Employees/DeparturesAirlineEmp";
 import GetCurrentTime from "../Time/GetCurrentTime";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import ArrivalsAirportEmp from "../FlightData/Airport Employee/ArrivalsAirportEmp";
+import DeparturesAirportEmp from "../FlightData/Airport Employee/DeparturesAirportEmp";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -36,12 +38,18 @@ const Main = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   }, []);
 
+  console.log("User role :", user);
+
+
   const handleNavigate = (page) => {
     var path = "/";
+    console.log(user.role);
     if (user.role === "User") {
       path += "user"
     } else if (user.role === "Airline Employee") {
       path += "employee"
+    } else if (user.role === "Airport Employee") {
+      path += "airportemp"
     }
     path += "/" + page;
     navigate(path);
@@ -111,6 +119,18 @@ const Main = () => {
           <Route
             path="/employee/departures"
             element={<DeparturesAirlineEmp />}
+          />
+        )}
+        {user.role === "Airport Employee" && (
+          <Route
+            path="/airportemp/arrivals"
+            element={<ArrivalsAirportEmp />}
+          />
+        )}
+        {user.role === "Airport Employee" && (
+          <Route
+            path="/airportemp/departures"
+            element={<DeparturesAirportEmp />}
           />
         )}
       </Routes>
