@@ -66,6 +66,10 @@ const Main = () => {
             display: "flex",
           }}
         >
+
+          <button name="arrivals" onClick={() => handleNavigate("arrivals")}>Arrivals</button>
+          <button name="departures" onClick={() => handleNavigate("departures")}>Departures</button>
+
           <span>
             <label style={{ marginRight: "10px" }}>Arrivals</label>
             <input
@@ -74,6 +78,7 @@ const Main = () => {
               value={getArrivals}
               onClick={() => handleNavigate("arrivals")}
               onChange={handleArrivals}
+              checked={getArrivals == "arrivals"}
             />
           </span>
           <span style={{ marginLeft: "10px" }}>

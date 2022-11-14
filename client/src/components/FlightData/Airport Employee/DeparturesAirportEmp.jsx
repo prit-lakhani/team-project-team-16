@@ -90,9 +90,9 @@ const DeparturesAirportEmp = () => {
                             <th>time</th>
                             <th>Terminal</th>
                             <th>Gate</th>
-                            <th>Baggage Claim</th>
+                            {/* <th>Baggage Claim</th>
                             <th></th>
-                            <th></th>
+                            <th></th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -110,7 +110,7 @@ const DeparturesAirportEmp = () => {
                                     <td>{flight.time}</td>
                                     <td>{flight.terminal}</td>
                                     <td>{flight.gate}</td>
-                                    <td>{flight.bag_claim}</td>
+                                    {/* <td>{flight.bag_claim}</td> */}
                                 </tr>
                             );
                         })}
