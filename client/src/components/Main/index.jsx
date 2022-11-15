@@ -11,14 +11,13 @@ import GetCurrentTime from "../Time/GetCurrentTime";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ArrivalsAirportEmp from "../FlightData/Airport Employee/ArrivalsAirportEmp";
 import DeparturesAirportEmp from "../FlightData/Airport Employee/DeparturesAirportEmp";
+import { Button } from "bootstrap";
+
 
 const Main = () => {
   const navigate = useNavigate();
   const [getArrivals, setGetArrivals] = useState("arrivals");
   const [getNewTime, setNewTime] = useState("All flights");
-  // const [curTime, setCurrTime] = useState();
-  // console.log("Retrive flights for next  : ", newTime, "hours");
-  // console.log("Current time: ", curTime);
 
   const handleArrivals = () => {
     console.log("from handleArrivals");
@@ -56,20 +55,22 @@ const Main = () => {
   };
 
   return (
-    <div className={styles.main_container}>
+    <div className={styles.main_container} >
+
+
+
       <nav className={styles.navbar}>
         <h1>Welcome back {user.firstName}</h1>
         <p>({user.role})</p>
         <h2>Flight details...</h2>
 
-        <button name="arrivals" onClick={() => handleNavigate("arrivals")}>Arrivals</button>
-        <button name="departures" onClick={() => handleNavigate("departures")}>Departures</button>
+
         {/* <span
           style={{
             display: "flex",
           }}
-        > */}
-        {/* <span>
+        >
+          <span>
             <label style={{ marginRight: "10px" }}>Arrivals</label>
             <input
               type="radio"
@@ -96,13 +97,14 @@ const Main = () => {
           Logout
         </button>
       </nav>
-      {/* <GetCurrentTime getNewTime={setNewTime} getCurrTime={setCurrTime} /> */}
-      {/* <GetCurrentTime getNewTime={getNewTime} /> */}
-      {/* {user.role === "User" && getArrivals !== "departures" && <ArrivalsGeneralUsers />}
-      {user.role === "User" && getArrivals === "departures" && <DeparturesGeneralUsers />}
 
-      {user.role === "Airline Employee" && getArrivals !== "departures" && < ArrivalsAirlineEmp />}
-      {user.role === "Airline Employee" && getArrivals === "departures" && < DeparturesAirlineEmp />} */}
+      <div>
+        <button type="button" className="btn btn-primary" name="arrivals" onClick={() => handleNavigate("arrivals")}>Arrivals</button>
+        <button type="button" className="btn btn-primary" name="departures" onClick={() => handleNavigate("departures")}>Departures</button>
+      </div>
+
+
+
       <Routes>
         {user.role === "User" && (
           <Route path="/user/arrivals" element={<ArrivalsGeneralUsers />} />
@@ -143,3 +145,16 @@ const Main = () => {
 };
 
 export default Main;
+
+
+
+
+
+
+{/* <GetCurrentTime getNewTime={setNewTime} getCurrTime={setCurrTime} /> */ }
+{/* <GetCurrentTime getNewTime={getNewTime} /> */ }
+{/* {user.role === "User" && getArrivals !== "departures" && <ArrivalsGeneralUsers />}
+      {user.role === "User" && getArrivals === "departures" && <DeparturesGeneralUsers />}
+
+      {user.role === "Airline Employee" && getArrivals !== "departures" && < ArrivalsAirlineEmp />}
+      {user.role === "Airline Employee" && getArrivals === "departures" && < DeparturesAirlineEmp />} */}

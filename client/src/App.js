@@ -2,10 +2,6 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Main from "./components/Main";
 import Signup from "./components/Singup";
 import Login from "./components/Login";
-import ArrivalsGeneralUsers from "./components/FlightData/GeneralUsers/ArrivalsGeneralUsers";
-import DeparturesGeneralUsers from "./components/FlightData/GeneralUsers/DeparturesGeneralUsers";
-import ArrivalsAirlineEmp from "./components/FlightData/Airline Employees/ArrivalsAirlineEmp";
-import DeparturesAirlineEmp from "./components/FlightData/Airline Employees/DeparturesAirlineEmp";
 
 function App() {
   const user = localStorage.getItem("user");
