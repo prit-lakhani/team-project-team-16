@@ -71,7 +71,7 @@ const ArrivalsAirportEmp = () => {
     return (
         <div>
             <select
-                name="timeViseFlightRetrivals"
+                name="timeWiseFlightRetrivals"
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
                 onChange={(e) => setTimeViseFlights(e.target.value)}

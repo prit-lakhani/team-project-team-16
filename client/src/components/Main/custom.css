@@ -1,0 +1,28 @@
+.custom-btn:active {
+  background: rgb(239, 8, 8);
+}
+
+.custom-btn:hover {
+  background: rgb(255, 166, 0);
+}
+
+.custom-btn {
+  /* background-color: #6777ef; */
+  background-color: #3bb19b;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  /* color: black; */
+  font-weight: 600;
+  color: whitesmoke;
+  border: #3bb19b;
+}
+
+.custom-css {
+  background-color: #3bb19b;
+  align-content: center;
+  border: #3bb19b;
+  color: whitesmoke;
+  font-weight: 600;
+  width: 250px;
+  height: 25px;
+}

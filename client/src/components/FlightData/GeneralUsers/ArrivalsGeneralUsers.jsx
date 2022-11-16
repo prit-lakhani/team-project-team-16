@@ -7,6 +7,7 @@ import Departures from "../Departures";
 import DeparturesGeneralUsers from "./DeparturesGeneralUsers";
 import moment from "moment";
 import DateTimePicker from "react-datetime-picker";
+import "/Users/spartan/Desktop/202-new/team-project-team-16/client/src/components/Main/custom.css";
 
 const ArrivalsGeneralUsers = () => {
     const [Flights, setFlightDetails] = useState([]);
@@ -68,20 +69,27 @@ const ArrivalsGeneralUsers = () => {
         }
     };
 
+    const myCss = {
+        color: 'black',
+    }
+
     return (
         <div>
             <select
-                name="timeViseFlightRetrivals"
-                className="mb-3"
+                name="timeWiseFlightRetrivals"
+                className="custom-css"
                 controlId="exampleForm.ControlInput1"
                 onChange={(e) => setTimeViseFlights(e.target.value)}
                 value={TimeViseFlights}
             >
+
                 <option>Select option to retrive flights</option>
-                {<option label="All Flights" value="0"></option>}
+                {<option style={myCss} label="All Flights" value="0"></option>}
                 {<option label="Next 1 hour" value="1"></option>}
                 {<option label="Next 2 hours" value="2"></option>}
                 {<option label="Next 4 hours" value="4"></option>}
+
+
             </select>
 
             {
@@ -123,7 +131,7 @@ const ArrivalsGeneralUsers = () => {
                     </tbody>
                 </Table>
             }
-        </div>
+        </div >
     );
 };
 

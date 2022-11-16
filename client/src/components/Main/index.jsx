@@ -12,7 +12,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import ArrivalsAirportEmp from "../FlightData/Airport Employee/ArrivalsAirportEmp";
 import DeparturesAirportEmp from "../FlightData/Airport Employee/DeparturesAirportEmp";
 import { Button } from "bootstrap";
-
+import "./custom.css";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -53,6 +53,11 @@ const Main = () => {
     path += "/" + page;
     navigate(path);
   };
+
+  const myComponentStyle = {
+    marginRight: 10,
+    marginTop: 5,
+  }
 
   return (
     <div className={styles.main_container} >
@@ -98,9 +103,9 @@ const Main = () => {
         </button>
       </nav>
 
-      <div>
-        <button type="button" className="btn btn-primary" name="arrivals" onClick={() => handleNavigate("arrivals")}>Arrivals</button>
-        <button type="button" className="btn btn-primary" name="departures" onClick={() => handleNavigate("departures")}>Departures</button>
+      <div className="cus_btn">
+        <button type="button" style={myComponentStyle} className="btn btn-primary custom-btn" name="arrivals" onClick={() => handleNavigate("arrivals")}>Arrivals</button>
+        <button type="button" className="btn btn-primary custom-btn " name="departures" onClick={() => handleNavigate("departures")}>Departures</button>
       </div>
 
 
@@ -140,7 +145,7 @@ const Main = () => {
           />
         )}
       </Routes>
-    </div>
+    </div >
   );
 };
 
