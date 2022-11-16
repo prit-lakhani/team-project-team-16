@@ -23,6 +23,14 @@ function checkGateNumber(gate) {
   return true;
 }
 
+const randomGate = () => {
+  var result = "";
+  var characters = "ABC";
+  result += characters.charAt(Math.floor(Math.random() * 3));
+  result += Math.floor(Math.random() * (32 - 1)) + 1;
+  return result;
+};
+
 router.post("/unassign", async (req, res) => {
   try {
     console.log("STATUS :", req.body.status);
@@ -106,6 +114,8 @@ router.get("/getgates", async (req, res) => {
 });
 
 router.post("/addgate", async (req, res) => {
+  console.log("Actucal gate no:", randomGate());
+
   try {
     if (!checkGateNumber(req.body.gate_number)) {
       return res.send({ message: "Gate nunmber is invlaid" });
@@ -124,4 +134,68 @@ router.post("/addgate", async (req, res) => {
   }
 });
 
+router.post("/random/assign", async (req, res) => {
+  try {
+    for (var i = 0; i < 20; i++) {
+      const gateRandom = randomGate();
+      const gate = await Gate.findOne({ gate_number: gateRandom });
+      if (gate) {
+        if (gate.status !== "") {
+          const assignGate = await Gate.updateOne(
+            { gate_number: gateRandom },
+            {
+              terminal: "Test",
+              status: "Test",
+              from: "Test",
+              to: "Test",
+              flight: "Test",
+            }
+          );
+          res.send({
+            message: "Gate:" + gateRandom + " assign successfully",
+          });
+          return;
+        }
+      } else {
+        await new Gate({
+          gate_number: gateRandom,
+          terminal: "Test",
+          status: "Test",
+          from: "Test",
+          to: "Test",
+          flight: "Test",
+        }).save();
+        res.send({
+          message: "Gate:" + gateRandom + " created succesfully",
+        });
+        return;
+      }
+    }
+    res.send({ message: "Gate could not assign" });
+    // console.log("Batch Arr :", batchArr);
+
+    // console.log("Gate to be updated:", gate);
+    // if (gate.status === "") {
+    //   const assignGate = await Gate.updateOne(
+    //     { gate_number: req.body.gate_number },
+    //     {
+    //       terminal: "Test",
+    //       status: "Test",
+    //       from: "Test",
+    //       to: "Test",
+    //       flight: "Test",
+    //     }
+    //   );
+    //   if (assignGate) {
+    //     res.send({ message: "Gate assign successfully" });
+    //   } else {
+    //     res.send({ message: "Gate assign unsuccessful" });
+    //   }
+    // } else {
+    //   return res.send({ message: "Gate could not assign" });
+    // }
+  } catch (error) {
+    res.send(error);
+  }
+});
 module.exports = router;
