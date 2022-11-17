@@ -15,6 +15,7 @@ const ArrivalsGeneralUsers = () => {
     const [filteredFlights, setFilteredFlights] = useState([]);
     const [TimeViseFlights, setTimeViseFlights] = useState("0");
 
+
     const handleArrivals = () => {
         console.log("from handleArrivals");
     };

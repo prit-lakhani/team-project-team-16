@@ -150,6 +150,34 @@ const DeparturesAirlineEmp = () => {
         }
     };
 
+
+    const assignGate = async (flightT) => {
+        console.log("assignGate function ....");
+        const gateObj = {
+            terminal: flightT.terminal,
+            flight_type: flightT.flight_type,
+            time: flightT.time,
+            airline: flightT.airline,
+            flight_id: flightT._id.slice(-6).toUpperCase(),
+        };
+        console.log(gateObj);
+
+        try {
+            const url = "http://localhost:8080/api/gates/random/assign";
+            const { data: res } = await axios.post(url, gateObj);
+            console.log(res);
+
+            const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
+            const { data: res2 } = await axios.post(url2, {
+                gate: res.gateNum,
+            });
+
+            console.log(res2);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     console.log(Flights);
     {
         return (
@@ -403,6 +431,18 @@ const DeparturesAirlineEmp = () => {
                                         >
                                             Delete
                                         </button>
+                                        {flight.gate == "" ?
+                                            <button
+                                                name="assign"
+                                                id={flight._id}
+                                                value={flight._id}
+                                                onClick={(e) => {
+                                                    assignGate(flight).then(res => { refreshPage(); });
+
+                                                }}
+                                            >
+                                                Assign Gate
+                                            </button> : <p></p>}
                                     </td>
                                 </tr>
                             );

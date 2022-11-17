@@ -81,6 +81,30 @@ router.post("/update/:id", async (req, res) => {
   }
 });
 
+router.post("/update/gate/:id", async (req, res) => {
+  try {
+    console.log("BODY", req.body);
+
+    const updatedOBJ = {
+      $set: { gate: req.body.gate },
+    };
+    console.log("Updated object :", updatedOBJ);
+
+    const updatedData = await AddFlight.updateOne(
+      { _id: req.params.id },
+      updatedOBJ
+    );
+    console.log("UPDATAED DATA", updatedData);
+    if (!updatedData) {
+      res.send({ message: "Data not updated" });
+    } else {
+      res.send(updatedData);
+    }
+  } catch (error) {
+    console.log("Error : ", error);
+  }
+});
+
 router.delete("/", async (req, res) => {
   try {
     const queryObject = url.parse(req.url, true).query;

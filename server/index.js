@@ -19,7 +19,6 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/flights", flightsRoutes);
-app.use("/api/flights", flightsRoutes);
 app.use("/api/gates", gateRoutes);
 
 const port = process.env.PORT || 8080;

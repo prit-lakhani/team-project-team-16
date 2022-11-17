@@ -140,18 +140,26 @@ router.post("/random/assign", async (req, res) => {
       const gateRandom = randomGate();
       const gate = await Gate.findOne({ gate_number: gateRandom });
       if (gate) {
-        if (gate.status !== "") {
-          const assignGate = await Gate.updateOne(
+        if (gate.flight_id === "") {
+          await Gate.updateOne(
             { gate_number: gateRandom },
             {
-              terminal: "Test",
-              status: "Test",
-              from: "Test",
-              to: "Test",
-              flight: "Test",
+              terminal: req.body.terminal,
+              flight_type: req.body.flight_type,
+              time_from: req.body.time,
+              time_to: req.body.time,
+              airline: req.body.airline,
+              flight_id: req.body.flight_id,
+            }
+          );
+          await Gate.updateOne(
+            { gate_number: gateRandom },
+            {
+              $set: { time_to: { $add: ["$time_from", 10 * 60 * 1000] } },
             }
           );
           res.send({
+            gateNum: gateRandom,
             message: "Gate:" + gateRandom + " assign successfully",
           });
           return;
@@ -159,13 +167,15 @@ router.post("/random/assign", async (req, res) => {
       } else {
         await new Gate({
           gate_number: gateRandom,
-          terminal: "Test",
-          status: "Test",
-          from: "Test",
-          to: "Test",
-          flight: "Test",
+          terminal: req.body.terminal,
+          flight_type: req.body.flight_type,
+          time_from: req.body.time,
+          time_to: req.body.time,
+          airline: req.body.airline,
+          flight_id: req.body.flight_id,
         }).save();
         res.send({
+          gateNum: gateRandom,
           message: "Gate:" + gateRandom + " created succesfully",
         });
         return;

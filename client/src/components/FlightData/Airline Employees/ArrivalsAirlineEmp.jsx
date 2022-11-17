@@ -24,10 +24,18 @@ const ArrivalsAirlineEmp = () => {
     const [UpdateAction, setUpdateAction] = useState("");
     const [UpdateAirline_ID, setUpdateID] = useState("");
 
+
+    const [time_from, setTime_from] = useState(new Date());
+    const [time_to, setTime_to] = useState("");
+
+    const [gate_number, setGate_number] = useState("");
+    const [gate_status, setGate_status] = useState("");
+
     // const [TimeViseFlights, setTimeViseFlights] = useState("All flights");
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -153,6 +161,55 @@ const ArrivalsAirlineEmp = () => {
             return false;
         }
     };
+
+    // const assignRandomGate = async (req, res) => {
+    //     const gateObj = {
+    //         gate_number,
+    //         terminal,
+    //         gate_status,
+    //         flight_type: flightType,
+    //         time_from,
+    //         time_to,
+    //         airline
+    //     };
+
+    //     try {
+    //         const url = "http://localhost:8080/api/gates/random/assign";
+    //         const { data: res } = await axios.post(url, gateObj);
+    //         console.log(res.message);
+    //         console.log("DATA:", res);
+
+    //     } catch (error) {
+    //         console.log("Error :", error);
+    //     }
+    // };
+
+    const assignGate = async (flightT) => {
+        console.log("assignGate function ....");
+        const gateObj = {
+            terminal: flightT.terminal,
+            flight_type: flightT.flight_type,
+            time: flightT.time,
+            airline: flightT.airline,
+            flight_id: flightT._id.slice(-6).toUpperCase(),
+        };
+        console.log(gateObj);
+
+        try {
+            const url = "http://localhost:8080/api/gates/random/assign";
+            const { data: res } = await axios.post(url, gateObj);
+            console.log(res);
+
+            const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
+            const { data: res2 } = await axios.post(url2, {
+                gate: res.gateNum,
+            });
+
+            console.log(res2);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     {
         return (
@@ -360,8 +417,6 @@ const ArrivalsAirlineEmp = () => {
                             <th>Gate</th>
                             <th>Baggage Claim</th>
                             <th>Action</th>
-                            <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -402,6 +457,20 @@ const ArrivalsAirlineEmp = () => {
                                         >
                                             Delete
                                         </button>
+                                        {flight.gate == "" ?
+                                            <button
+                                                name="assign"
+                                                id={flight._id}
+                                                value={flight._id}
+                                                onClick={(e) => {
+                                                    assignGate(flight).then(res => {
+                                                        refreshPage()
+                                                    })
+                                                }}
+                                            >
+                                                Assign Gate
+                                            </button>
+                                            : <p></p>}
                                     </td>
                                 </tr>
                             );
