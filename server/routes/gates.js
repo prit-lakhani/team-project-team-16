@@ -1,5 +1,7 @@
 const router = require("express").Router();
+const db = require("../db");
 const { Gate } = require("../models/gateAssign");
+const { AllGatesDetails } = require("../models/gates");
 
 function checkGateNumber(gate) {
   console.log(gate);
@@ -113,6 +115,22 @@ router.get("/getgates", async (req, res) => {
   }
 });
 
+router.get("/getgate/:id", async (req, res) => {
+  try {
+    //console.log("IDS:", req.params);
+    const gate = await Gate.findOne({ flight_id: req.params.id });
+    //console.log("Gates:", gate);
+    if (gate) {
+      res.send({ gate: gate.gate_number });
+    } else {
+      res.send({ gate: "" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 router.post("/addgate", async (req, res) => {
   console.log("Actucal gate no:", randomGate());
 
@@ -136,6 +154,11 @@ router.post("/addgate", async (req, res) => {
 
 router.post("/random/assign", async (req, res) => {
   try {
+    const ext_gate = await Gate.findOne({ flight_id: req.body.flight_id });
+    if (ext_gate) {
+      res.send({ message: "Gate already assigned" });
+      return;
+    }
     for (var i = 0; i < 20; i++) {
       const gateRandom = randomGate();
       const gate = await Gate.findOne({ gate_number: gateRandom });
@@ -182,28 +205,55 @@ router.post("/random/assign", async (req, res) => {
       }
     }
     res.send({ message: "Gate could not assign" });
-    // console.log("Batch Arr :", batchArr);
+  } catch (error) {
+    res.send(error);
+  }
+});
 
-    // console.log("Gate to be updated:", gate);
-    // if (gate.status === "") {
-    //   const assignGate = await Gate.updateOne(
-    //     { gate_number: req.body.gate_number },
-    //     {
-    //       terminal: "Test",
-    //       status: "Test",
-    //       from: "Test",
-    //       to: "Test",
-    //       flight: "Test",
-    //     }
-    //   );
-    //   if (assignGate) {
-    //     res.send({ message: "Gate assign successfully" });
-    //   } else {
-    //     res.send({ message: "Gate assign unsuccessful" });
-    //   }
-    // } else {
-    //   return res.send({ message: "Gate could not assign" });
-    // }
+router.post("/allgates", async (req, res) => {
+  //   for (var i = 0; i < 96; i++) {
+  // var j = 0;
+  try {
+    const letterArr = ["A", "B", "C"];
+    var gateNumArr = [];
+    for (var i = 0; i < letterArr.length; i++) {
+      for (var j = 1; j <= 32; j++) {
+        var gateNumber = "";
+        gateNumber += letterArr[i];
+        gateNumber += j;
+        gateNumArr.push(gateNumber);
+      }
+    }
+    console.log(gateNumArr);
+    var data = [];
+
+    gateNumArr.forEach(async (g) => {
+      data.push({
+        gate_number: g,
+        gate_status: "",
+        terminal: "",
+        airline: "",
+        flight_type: "",
+        time_from: "",
+        time_to: "",
+      });
+    });
+    console.log("DATA :", data.length);
+
+    const gateCheck = await AllGatesDetails.findOne(data.gate);
+    if (gateCheck) {
+      return res.send({ message: " Gate is already added in the database" });
+    }
+
+    await AllGatesDetails.insertMany(data)
+      .then(() => {
+        console.log("Data inserted"); // Success
+        return;
+      })
+      .catch((error) => {
+        console.log(error); // Failure
+      });
+    res.send({ message: "Gate numbers" + gateNumArr });
   } catch (error) {
     res.send(error);
   }

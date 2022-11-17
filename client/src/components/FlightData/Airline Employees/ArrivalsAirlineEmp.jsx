@@ -95,7 +95,7 @@ const ArrivalsAirlineEmp = () => {
         getFlightDetails();
     }, []);
 
-    console.log("Flight from arrivals", Flights);
+    // console.log("Flight from arrivals", Flights);
 
     const getFlightDetails = async (req, res) => {
         try {
@@ -107,6 +107,18 @@ const ArrivalsAirlineEmp = () => {
             // setFilteredFlights(response.data);
         } catch (error) {
             console.log(error);
+        }
+    };
+
+    const getGate = async (flightId) => {
+        try {
+            const response = await axios.get(
+                "http://localhost:8080/api/gates/getgate/" + flightId
+            );
+            return response.data.gate;
+        } catch (error) {
+            console.log(error);
+            return "";
         }
     };
 
@@ -437,6 +449,8 @@ const ArrivalsAirlineEmp = () => {
                                     <td>{flight.bag_claim}</td>
                                     <td>
                                         <button
+                                            className="btn btn-warning"
+
                                             name="edit"
                                             value={flight._id}
                                             onClick={(e) => {
@@ -447,6 +461,7 @@ const ArrivalsAirlineEmp = () => {
                                             Edit
                                         </button>
                                         <button
+                                            className="btn btn-danger"
                                             name="delete"
                                             id={flight._id}
                                             value={flight._id}
@@ -457,8 +472,9 @@ const ArrivalsAirlineEmp = () => {
                                         >
                                             Delete
                                         </button>
-                                        {flight.gate == "" ?
+                                        {flight.gate === "" ?
                                             <button
+                                                className="btn btn-info"
                                                 name="assign"
                                                 id={flight._id}
                                                 value={flight._id}
