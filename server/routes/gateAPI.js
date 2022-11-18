@@ -6,6 +6,7 @@ const { Gate } = require("../models/gateAssign");
 const { AllGatesDetails } = require("../models/gates");
 const { AddFlight } = require("../models/addFlight");
 
+//function to check gate number
 function checkGateNumber(gate) {
   console.log(gate);
   var letter = gate.slice(0, 1);
@@ -28,6 +29,7 @@ function checkGateNumber(gate) {
   return true;
 }
 
+//Generating random gate
 const randomGate = () => {
   var result = "";
   var characters = "ABC";
@@ -36,6 +38,7 @@ const randomGate = () => {
   return result;
 };
 
+//Unassigning gates
 router.post("/unassign", async (req, res) => {
   try {
     console.log("STATUS :", req.body.status);
@@ -70,6 +73,7 @@ router.post("/unassign", async (req, res) => {
   }
 });
 
+//Assigning gates
 router.post("/assign", async (req, res) => {
   try {
     console.log("STATUS :", req.body.status);
@@ -103,6 +107,8 @@ router.post("/assign", async (req, res) => {
   }
 });
 
+
+//Getting gate details
 router.get("/getgates", async (req, res) => {
   try {
     const gate = await AllGatesDetails.find();
@@ -117,6 +123,7 @@ router.get("/getgates", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
 
 router.get("/getgate/:id", async (req, res) => {
   try {
