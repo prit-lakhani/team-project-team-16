@@ -9,6 +9,7 @@ import dynamicURL from "../../../Utils/urlConfig";
 
 import Main from "../../Main";
 
+//Getting gate details
 const GateDetails = () => {
   const navigate = useNavigate();
   const [Gates, setGates] = useState([]);
@@ -32,10 +33,10 @@ const GateDetails = () => {
 
   const refreshPage = () => {
     window.location.reload();
-    toast("Wow so easy!");
+    toast("Done!!");
     // window.alert("Operation perfromed successfully");
   };
-
+//Enabeling gates from maintainance
   const enableGate = async (book, gate) => {
     console.log("Enable Gate ID : ", book._id, gate._id);
     const sendData = {
