@@ -25,11 +25,11 @@ const ArrivalsAirlineEmp = () => {
     const [UpdateAirline_ID, setUpdateID] = useState("");
 
 
-    const [time_from, setTime_from] = useState(new Date());
-    const [time_to, setTime_to] = useState("");
+    // const [time_from, setTime_from] = useState(new Date());
+    // const [time_to, setTime_to] = useState("");
 
-    const [gate_number, setGate_number] = useState("");
-    const [gate_status, setGate_status] = useState("");
+    // const [gate_number, setGate_number] = useState("");
+    // const [gate_status, setGate_status] = useState("");
 
     // const [TimeViseFlights, setTimeViseFlights] = useState("All flights");
 
@@ -197,13 +197,23 @@ const ArrivalsAirlineEmp = () => {
     // };
 
     const assignGate = async (flightT) => {
+        // moment(UpdateTime).format("lll")
+        var start_time = moment(flightT.time);
+        var end_time = start_time;
+
+        end_time = moment(start_time).add(1, 'hours');
+        // moment(end_time).format("lll")
+        const start = moment(start_time).format("lll")
+        const end = moment(end_time).format("lll");
+        // end_time.add(1, "h");
         console.log("assignGate function ....");
         const gateObj = {
             terminal: flightT.terminal,
             flight_type: flightT.flight_type,
-            time: flightT.time,
+            time: start,
+            end: end,
             airline: flightT.airline,
-            flight_id: flightT._id.slice(-6).toUpperCase(),
+            flight_id: flightT._id
         };
         console.log(gateObj);
 
