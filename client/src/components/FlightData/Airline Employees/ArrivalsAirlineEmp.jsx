@@ -222,12 +222,12 @@ const ArrivalsAirlineEmp = () => {
             const { data: res } = await axios.post(url, gateObj);
             console.log(res);
 
-            const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
-            const { data: res2 } = await axios.post(url2, {
-                gate: res.gateNum,
-            });
+            // const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
+            // const { data: res2 } = await axios.post(url2, {
+            //     gate: res.gateNum,
+            // });
 
-            console.log(res2);
+            // console.log(res2);
         } catch (error) {
             console.log(error);
         }

@@ -8,7 +8,7 @@ const allGatesSchema = new mongoose.Schema({
   flight_type: { type: String, required: false },
   time_from: { type: String, required: false },
   time_to: { type: String, required: false },
-  booking: [{}],
+  booking: [],
 });
 
 const AllGatesDetails = mongoose.model("AllGatesDetails", allGatesSchema);

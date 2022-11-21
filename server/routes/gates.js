@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("../db");
+var moment = require("moment");
 const { Gate } = require("../models/gateAssign");
 const { AllGatesDetails } = require("../models/gates");
 
@@ -214,16 +215,17 @@ router.post("/random/assign", async (req, res) => {
     // console.log("Req body:", req.body);
     //add 1 hour to scheduled time
     console.log("time from frontend: ", req.body.time);
-    var start = req.body.time;
-    var end = req.body.end;
+    var new_start = req.body.time;
+    var new_end = req.body.end;
 
     // end.setTime(end.getTime() + 60 * 60 * 1000);
 
-    console.log("Start :", start, "End : ", end);
+    console.log("Start :", new_start, "End : ", new_end);
     // const formatted_start = moment(start).format("lll");
     // console.log("formatted_start :", formatted_start);
 
     var data = [];
+    //ferching all gates' details and shuffling them
     data = await AllGatesDetails.find();
     // console.log(data);
 
@@ -249,52 +251,57 @@ router.post("/random/assign", async (req, res) => {
     }
     console.log("Shuffed data lenght :", data.length);
 
-    const randomGateNumber = Math.floor(Math.random() * (32 - 1)) + 1;
-    console.log("randomGateNumber", randomGateNumber);
-    console.log("randomGateNumber data", data[randomGateNumber]);
-
-    data.forEach(async (e) => {
-      //   e.booking.forEach((time) => {
-      //     if (time.end <= start) {
-      //       return true;
-      //     }
-      //     return false;
-      //   });
-
-      //   if (e) break;
-      // if(gateData.booking )
-      //for booking - start and end - check for all booking
-      // assign - database (flight, allgate)
-
-      //   console.log("E :", e);
-      const gateObj = {
-        gate_number: e.gate_number,
-        terminal: req.body.terminal,
-        flight_type: req.body.flight_type,
-        time_from: start,
-        time_to: end,
-        airline: req.body.airline,
-        flight_id: req.body.flight_id,
-        booking: [
-          {
-            start: start,
-            end: end,
-            flight_id: req.body.flight_id,
-          },
-        ],
-      };
-
-      const gateData = await AllGatesDetails.updateOne(
-        { gate_number: e.gate_number },
-        gateObj
-      );
-      if (gateData) {
-        return res.send({
-          message:
-            "Gate details added successfully into all gates detials document.",
+    //find an gate number to assign from shuffled data
+    console.log("New start :", new_start);
+    console.log("end ", new_end);
+    var gate = {};
+    var booked = 0;
+    data.forEach(async (g) => {
+      if (booked == 0) {
+        g.booking.map((time) => {
+          if (
+            moment(new_start).isBetween(time.end, time.start) ||
+            moment(new_end).isBetween(time.end, time.start) ||
+            moment(time.end).isBetween(moment(new_start), moment(new_end)) ||
+            moment(time.start).isBetween(moment(new_start), moment(new_end))
+          ) {
+            booked = 1;
+          }
         });
+
+        if (booked == 0) {
+          gate = { ...g };
+          booked = 1;
+        }
       }
     });
+
+    console.log({ gate });
+
+    const gateObj = {
+      // gate_number: e.gate_number,
+      terminal: req.body.terminal,
+      flight_type: req.body.flight_type,
+      time_from: new_start,
+      time_to: new_end,
+      airline: req.body.airline,
+      flight_id: req.body.flight_id,
+      booking: [
+        gate.booking,
+        {
+          start: new_start,
+          end: new_end,
+          flight_id: req.body.flight_id,
+        },
+      ],
+    };
+
+    console.log("Gate to be updated :", gateObj);
+
+    const gateData = await AllGatesDetails.updateOne(
+      { gate_number: gate.gate_number },
+      gateObj
+    );
   } catch (error) {
     console.log(error);
   }
@@ -326,13 +333,7 @@ router.post("/allgates", async (req, res) => {
         flight_type: "",
         time_from: "",
         time_to: "",
-        booking: [
-          {
-            start: "",
-            end: "",
-            flight_id: "",
-          },
-        ],
+        booking: [],
       });
     });
     console.log("DATA :", data.length);
