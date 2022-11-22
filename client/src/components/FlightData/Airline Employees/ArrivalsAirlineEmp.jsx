@@ -215,19 +215,22 @@ const ArrivalsAirlineEmp = () => {
             airline: flightT.airline,
             flight_id: flightT._id
         };
-        console.log(gateObj);
+        console.log("Gate OBJECT", gateObj);
+        console.log("Flight ID to be updated(Gate number) : ", flightT._id)
 
         try {
             const url = "http://localhost:8080/api/gates/random/assign";
-            const { data: res } = await axios.post(url, gateObj);
-            console.log(res);
+            await axios.post(url, gateObj);
+            console.log("hello");
+            // res.send({ message: "Hello from random/assign" });
+
 
             // const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
             // const { data: res2 } = await axios.post(url2, {
             //     gate: res.gateNum,
             // });
 
-            // console.log(res2);
+            // console.log("Res 2", res2);
         } catch (error) {
             console.log(error);
         }

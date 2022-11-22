@@ -3,6 +3,7 @@ const db = require("../db");
 var moment = require("moment");
 const { Gate } = require("../models/gateAssign");
 const { AllGatesDetails } = require("../models/gates");
+const { AddFlight } = require("../models/addFlight");
 
 function checkGateNumber(gate) {
   console.log(gate);
@@ -154,111 +155,28 @@ router.post("/addgate", async (req, res) => {
 });
 
 router.post("/random/assign", async (req, res) => {
-  //   try {
-  //     const ext_gate = await Gate.findOne({ flight_id: req.body.flight_id });
-  //     if (ext_gate) {
-  //       res.send({ message: "Gate already assigned" });
-  //       return;
-  //     }
-  //     for (var i = 0; i < 20; i++) {
-  //       const gateRandom = randomGate();
-  //       const gate = await Gate.findOne({ gate_number: gateRandom });
-  //       if (gate) {
-  //         if (gate.flight_id === "") {
-  //           await Gate.updateOne(
-  //             { gate_number: gateRandom },
-  //             {
-  //               terminal: req.body.terminal,
-  //               flight_type: req.body.flight_type,
-  //               time_from: req.body.time,
-  //               time_to: req.body.time,
-  //               airline: req.body.airline,
-  //               flight_id: req.body.flight_id,
-  //             }
-  //           );
-  //           await Gate.updateOne(
-  //             { gate_number: gateRandom },
-  //             {
-  //               $set: { time_to: { $add: ["$time_from", 10 * 60 * 1000] } },
-  //             }
-  //           );
-  //           res.send({
-  //             gateNum: gateRandom,
-  //             message: "Gate:" + gateRandom + " assign successfully",
-  //           });
-  //           return;
-  //         }
-  //       } else {
-  //         await new Gate({
-  //           gate_number: gateRandom,
-  //           terminal: req.body.terminal,
-  //           flight_type: req.body.flight_type,
-  //           time_from: req.body.time,
-  //           time_to: req.body.time,
-  //           airline: req.body.airline,
-  //           flight_id: req.body.flight_id,
-  //         }).save();
-  //         res.send({
-  //           gateNum: gateRandom,
-  //           message: "Gate:" + gateRandom + " created succesfully",
-  //         });
-  //         return;
-  //       }
-  //     }
-  //     res.send({ message: "Gate could not assign" });
-  //   } catch (error) {
-  //     res.send(error);
-  //   }
   try {
-    // console.log(req.body);
-    // console.log("data");
-    // console.log("Req body:", req.body);
-    //add 1 hour to scheduled time
-    console.log("time from frontend: ", req.body.time);
     var new_start = req.body.time;
     var new_end = req.body.end;
-
-    // end.setTime(end.getTime() + 60 * 60 * 1000);
-
-    console.log("Start :", new_start, "End : ", new_end);
-    // const formatted_start = moment(start).format("lll");
-    // console.log("formatted_start :", formatted_start);
-
-    var data = [];
-    //ferching all gates' details and shuffling them
-    data = await AllGatesDetails.find();
-    // console.log(data);
-
-    // data.forEach((e) => {
-    //   // logic
-    //   console.log(e.gate_number);
-    // });
+    var data = await AllGatesDetails.find();
 
     let currentIndex = data.length,
       randomIndex;
-
-    // While there remain elements to shuffle.
     while (currentIndex != 0) {
-      // Pick a remaining element.
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
-      // And swap it with the current element.
       [data[currentIndex], data[randomIndex]] = [
         data[randomIndex],
         data[currentIndex],
       ];
     }
-    console.log("Shuffed data lenght :", data.length);
-
-    //find an gate number to assign from shuffled data
-    console.log("New start :", new_start);
-    console.log("end ", new_end);
     var gate = {};
     var booked = 0;
-    data.forEach(async (g) => {
+
+    data.forEach((g) => {
       if (booked == 0) {
-        g.booking.map((time) => {
+        g.booking.forEach((time) => {
           if (
             moment(new_start).isBetween(time.end, time.start) ||
             moment(new_end).isBetween(time.end, time.start) ||
@@ -270,38 +188,24 @@ router.post("/random/assign", async (req, res) => {
         });
 
         if (booked == 0) {
-          gate = { ...g };
+          gate = g;
           booked = 1;
         }
       }
     });
 
-    console.log({ gate });
-
-    const gateObj = {
-      // gate_number: e.gate_number,
-      terminal: req.body.terminal,
-      flight_type: req.body.flight_type,
+    gate.booking.push({
       time_from: new_start,
       time_to: new_end,
-      airline: req.body.airline,
       flight_id: req.body.flight_id,
-      booking: [
-        gate.booking,
-        {
-          start: new_start,
-          end: new_end,
-          flight_id: req.body.flight_id,
-        },
-      ],
-    };
-
-    console.log("Gate to be updated :", gateObj);
-
-    const gateData = await AllGatesDetails.updateOne(
-      { gate_number: gate.gate_number },
-      gateObj
-    );
+      gate_status: "Booked",
+    });
+    gate.save();
+    await AddFlight.findByIdAndUpdate(req.body.flight_id, {
+      gate: gate.gate_number,
+    });
+    // const data2 = await AddFlight.find({ flight_type: { $eq: "arriving" } });
+    res.send();
   } catch (error) {
     console.log(error);
   }
