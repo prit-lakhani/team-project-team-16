@@ -63,7 +63,7 @@ router.post("/update/:id", async (req, res) => {
       flight_type: req.body.UpdateFlightType,
       time: req.body.UpdateTime,
       terminal: req.body.UpdateTerminal,
-      gate: req.body.UpdateGate,
+      gate: "",
       bag_claim: req.body.UpdateBagClaim,
     };
 
@@ -122,11 +122,11 @@ router.get("/getgates/:id", async (req, res) => {
     var bookingGate;
     const Gid = req.params.id;
     console.log("GID:", Gid);
-    const flight = await AddFlight.findById(Gid)
+    const flight = await AddFlight.findById(Gid);
     const gate = await AllGatesDetails.findOne({ gate_number: flight.gate });
     // console.log(flight);
     // console.log(JSON.stringify(gate));
-    var rus = gate.booking.filter((b) => b.flight_id != Gid)
+    var rus = gate.booking.filter((b) => b.flight_id != Gid);
     gate.booking = rus;
     gate.save();
     // if (gate.length > 0) {
@@ -145,8 +145,8 @@ router.get("/getgates/:id", async (req, res) => {
     //             }
     //           })
     //           // gate name - object
-    //           // booking = 
-    //           // filter = 
+    //           // booking =
+    //           // filter =
     //           // object.save()
 
     //           console.log("Update : ", deletedGate);
