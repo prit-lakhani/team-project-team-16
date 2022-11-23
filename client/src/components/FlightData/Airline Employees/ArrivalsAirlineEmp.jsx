@@ -108,17 +108,17 @@ const ArrivalsAirlineEmp = () => {
         }
     };
 
-    const getGate = async (flightId) => {
-        try {
-            const response = await axios.get(
-                "http://localhost:8080/api/gates/getgate/" + flightId
-            );
-            return response.data.gate;
-        } catch (error) {
-            console.log(error);
-            return "";
-        }
-    };
+    // const getGate = async (flightId) => {
+    //     try {
+    //         const response = await axios.get(
+    //             "http://localhost:8080/api/gates/getgate/" + flightId
+    //         );
+    //         return response.data.gate;
+    //     } catch (error) {
+    //         console.log(error);
+    //         return "";
+    //     }
+    // };
 
     const handleDeleteFlight = async (e) => {
         const IDToBeDeleted = e.target.value;
@@ -133,6 +133,22 @@ const ArrivalsAirlineEmp = () => {
         } catch (error) {
             console.log("Error", error);
         }
+    };
+
+    const handleDeleteGate = async (e) => {
+        const FlightIDToBeDeleted = e.target.value;
+        console.log("GateIDToBeDeleted :", FlightIDToBeDeleted);
+        try {
+            const response = await axios.get(
+                "http://localhost:8080/api/flights/getgates/" + FlightIDToBeDeleted
+            );
+            if (response) {
+                console.log("Gate details : ", response.data);
+            }
+        } catch (error) {
+            console.log("Error", error);
+        }
+
     };
 
     const refreshPage = () => {
@@ -453,7 +469,8 @@ const ArrivalsAirlineEmp = () => {
                                             value={flight._id}
                                             onClick={(e) => {
                                                 handleDeleteFlight(e);
-                                                refreshPage();
+                                                handleDeleteGate(e);
+                                                // refreshPage();
                                             }}
                                         >
                                             Delete

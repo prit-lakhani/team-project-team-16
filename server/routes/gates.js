@@ -104,7 +104,7 @@ router.post("/assign", async (req, res) => {
 
 router.get("/getgates", async (req, res) => {
   try {
-    const gate = await Gate.find();
+    const gate = await AllGatesDetails.find();
     console.log("Gates:", gate);
     if (gate.length > 0) {
       return res.send(gate);

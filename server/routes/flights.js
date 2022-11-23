@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { AddFlight } = require("../models/addFlight");
 const url = require("url");
+const { AllGatesDetails } = require("../models/gates");
 
 router.post("/", async (req, res) => {
   try {
@@ -113,6 +114,54 @@ router.delete("/", async (req, res) => {
     res.send(id);
   } catch (error) {
     console.log("Error", error);
+  }
+});
+
+router.get("/getgates/:id", async (req, res) => {
+  try {
+    var bookingGate;
+    const Gid = req.params.id;
+    console.log("GID:", Gid);
+    const flight = await AddFlight.findById(Gid)
+    const gate = await AllGatesDetails.findOne({ gate_number: flight.gate });
+    // console.log(flight);
+    // console.log(JSON.stringify(gate));
+    var rus = gate.booking.filter((b) => b.flight_id != Gid)
+    gate.booking = rus;
+    gate.save();
+    // if (gate.length > 0) {
+    //   gate.forEach(async (e) => {
+    //     e.booking.forEach(async (book) => {
+    //       if (book) {
+    //         if (book.flight_id === Gid) {
+    //           const bookID = book._id;
+    //           console.log("desired booking :", bookID);
+    //           const deletedGate = await AllGatesDetails.updateMany({}, {
+    //             $pull: {
+    //               booking:
+    //               {
+    //                 flight_id: Gid
+    //               }
+    //             }
+    //           })
+    //           // gate name - object
+    //           // booking = 
+    //           // filter = 
+    //           // object.save()
+
+    //           console.log("Update : ", deletedGate);
+    //         }
+    //       }
+    //     });
+
+    //   });
+    //   return res.send({ message: "Booking retrived successfully" });
+    // } else {
+    //   return res.send({ message: "No gates found" });
+    // }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
 
