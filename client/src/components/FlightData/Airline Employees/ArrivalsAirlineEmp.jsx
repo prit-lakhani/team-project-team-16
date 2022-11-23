@@ -24,7 +24,6 @@ const ArrivalsAirlineEmp = () => {
     const [UpdateAction, setUpdateAction] = useState("");
     const [UpdateAirline_ID, setUpdateID] = useState("");
 
-
     // const [time_from, setTime_from] = useState(new Date());
     // const [time_to, setTime_to] = useState("");
 
@@ -35,7 +34,6 @@ const ArrivalsAirlineEmp = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -143,7 +141,6 @@ const ArrivalsAirlineEmp = () => {
 
     const [TimeViseFlights, setTimeViseFlights] = useState("0");
 
-
     const checkTime = (userTime, flightTime) => {
         var pTime = parseInt(userTime, 10);
         if (pTime <= 0) {
@@ -174,36 +171,14 @@ const ArrivalsAirlineEmp = () => {
         }
     };
 
-    // const assignRandomGate = async (req, res) => {
-    //     const gateObj = {
-    //         gate_number,
-    //         terminal,
-    //         gate_status,
-    //         flight_type: flightType,
-    //         time_from,
-    //         time_to,
-    //         airline
-    //     };
-
-    //     try {
-    //         const url = "http://localhost:8080/api/gates/random/assign";
-    //         const { data: res } = await axios.post(url, gateObj);
-    //         console.log(res.message);
-    //         console.log("DATA:", res);
-
-    //     } catch (error) {
-    //         console.log("Error :", error);
-    //     }
-    // };
-
     const assignGate = async (flightT) => {
         // moment(UpdateTime).format("lll")
         var start_time = moment(flightT.time);
         var end_time = start_time;
 
-        end_time = moment(start_time).add(1, 'hours');
+        end_time = moment(start_time).add(1, "hours");
         // moment(end_time).format("lll")
-        const start = moment(start_time).format("lll")
+        const start = moment(start_time).format("lll");
         const end = moment(end_time).format("lll");
         // end_time.add(1, "h");
         console.log("assignGate function ....");
@@ -213,17 +188,16 @@ const ArrivalsAirlineEmp = () => {
             time: start,
             end: end,
             airline: flightT.airline,
-            flight_id: flightT._id
+            flight_id: flightT._id,
         };
         console.log("Gate OBJECT", gateObj);
-        console.log("Flight ID to be updated(Gate number) : ", flightT._id)
+        console.log("Flight ID to be updated(Gate number) : ", flightT._id);
 
         try {
             const url = "http://localhost:8080/api/gates/random/assign";
             await axios.post(url, gateObj);
             console.log("hello");
             // res.send({ message: "Hello from random/assign" });
-
 
             // const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
             // const { data: res2 } = await axios.post(url2, {
@@ -234,7 +208,7 @@ const ArrivalsAirlineEmp = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     {
         return (
@@ -463,7 +437,6 @@ const ArrivalsAirlineEmp = () => {
                                     <td>
                                         <button
                                             className="btn btn-warning"
-
                                             name="edit"
                                             value={flight._id}
                                             onClick={(e) => {
@@ -485,21 +458,23 @@ const ArrivalsAirlineEmp = () => {
                                         >
                                             Delete
                                         </button>
-                                        {flight.gate === "" ?
+                                        {flight.gate === "" ? (
                                             <button
                                                 className="btn btn-info"
                                                 name="assign"
                                                 id={flight._id}
                                                 value={flight._id}
                                                 onClick={(e) => {
-                                                    assignGate(flight).then(res => {
-                                                        refreshPage()
-                                                    })
+                                                    assignGate(flight).then((res) => {
+                                                        refreshPage();
+                                                    });
                                                 }}
                                             >
                                                 Assign Gate
                                             </button>
-                                            : <p></p>}
+                                        ) : (
+                                            <p></p>
+                                        )}
                                     </td>
                                 </tr>
                             );

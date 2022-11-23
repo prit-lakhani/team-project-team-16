@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import AddFlightData from "../AddFlightDetails";
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
+import "bootstrap/dist/css/bootstrap.css";
+
 
 
 const DeparturesAirlineEmp = () => {
@@ -151,32 +153,71 @@ const DeparturesAirlineEmp = () => {
     };
 
 
+    // const assignGate = async (flightT) => {
+    //     console.log("assignGate function ....");
+    //     const gateObj = {
+    //         terminal: flightT.terminal,
+    //         flight_type: flightT.flight_type,
+    //         time: flightT.time,
+    //         airline: flightT.airline,
+    //         flight_id: flightT._id.slice(-6).toUpperCase(),
+    //     };
+    //     console.log(gateObj);
+
+    //     try {
+    //         const url = "http://localhost:8080/api/gates/random/assign";
+    //         const { data: res } = await axios.post(url, gateObj);
+    //         console.log(res);
+
+    //         const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
+    //         const { data: res2 } = await axios.post(url2, {
+    //             gate: res.gateNum,
+    //         });
+
+    //         console.log(res2);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
     const assignGate = async (flightT) => {
+        // moment(UpdateTime).format("lll")
+        var start_time = moment(flightT.time);
+        var end_time = start_time;
+
+        end_time = moment(start_time).add(1, "hours");
+        // moment(end_time).format("lll")
+        const start = moment(start_time).format("lll");
+        const end = moment(end_time).format("lll");
+        // end_time.add(1, "h");
         console.log("assignGate function ....");
         const gateObj = {
             terminal: flightT.terminal,
             flight_type: flightT.flight_type,
-            time: flightT.time,
+            time: start,
+            end: end,
             airline: flightT.airline,
-            flight_id: flightT._id.slice(-6).toUpperCase(),
+            flight_id: flightT._id,
         };
-        console.log(gateObj);
+        console.log("Gate OBJECT", gateObj);
+        console.log("Flight ID to be updated(Gate number) : ", flightT._id);
 
         try {
             const url = "http://localhost:8080/api/gates/random/assign";
-            const { data: res } = await axios.post(url, gateObj);
-            console.log(res);
+            await axios.post(url, gateObj);
+            console.log("hello");
+            // res.send({ message: "Hello from random/assign" });
 
-            const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
-            const { data: res2 } = await axios.post(url2, {
-                gate: res.gateNum,
-            });
+            // const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
+            // const { data: res2 } = await axios.post(url2, {
+            //     gate: res.gateNum,
+            // });
 
-            console.log(res2);
+            // console.log("Res 2", res2);
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     console.log(Flights);
     {
@@ -412,6 +453,7 @@ const DeparturesAirlineEmp = () => {
                                     <td>
                                         <button
                                             name="edit"
+                                            className="btn btn-warning"
                                             value={flight._id}
                                             onClick={(e) => {
                                                 handleShow(e);
@@ -422,6 +464,7 @@ const DeparturesAirlineEmp = () => {
                                         </button>
                                         <button
                                             name="delete"
+                                            className="btn btn-danger"
                                             id={flight._id}
                                             value={flight._id}
                                             onClick={(e) => {
@@ -434,6 +477,7 @@ const DeparturesAirlineEmp = () => {
                                         {flight.gate == "" ?
                                             <button
                                                 name="assign"
+                                                className="btn btn-info"
                                                 id={flight._id}
                                                 value={flight._id}
                                                 onClick={(e) => {

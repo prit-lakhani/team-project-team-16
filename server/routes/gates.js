@@ -204,7 +204,7 @@ router.post("/random/assign", async (req, res) => {
     await AddFlight.findByIdAndUpdate(req.body.flight_id, {
       gate: gate.gate_number,
     });
-    // const data2 = await AddFlight.find({ flight_type: { $eq: "arriving" } });
+
     res.send();
   } catch (error) {
     console.log(error);
@@ -212,8 +212,6 @@ router.post("/random/assign", async (req, res) => {
 });
 
 router.post("/allgates", async (req, res) => {
-  //   for (var i = 0; i < 96; i++) {
-  // var j = 0;
   try {
     const letterArr = ["A", "B", "C"];
     var gateNumArr = [];
