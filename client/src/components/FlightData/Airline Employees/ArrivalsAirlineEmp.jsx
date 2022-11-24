@@ -108,18 +108,6 @@ const ArrivalsAirlineEmp = () => {
     }
   };
 
-  // const getGate = async (flightId) => {
-  //     try {
-  //         const response = await axios.get(
-  //             "http://localhost:8080/api/gates/getgate/" + flightId
-  //         );
-  //         return response.data.gate;
-  //     } catch (error) {
-  //         console.log(error);
-  //         return "";
-  //     }
-  // };
-
   const handleDeleteFlight = async (e) => {
     const IDToBeDeleted = e.target.value;
     console.log("IDToBeDeleted : ", IDToBeDeleted);
@@ -212,7 +200,6 @@ const ArrivalsAirlineEmp = () => {
     try {
       const url = "http://localhost:8080/api/gates/random/assign";
       await axios.post(url, gateObj);
-      console.log("hello");
     } catch (error) {
       console.log(error);
     }

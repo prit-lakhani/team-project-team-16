@@ -5,8 +5,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-import DateTimePicker from 'react-datetime-picker';
-import moment from 'moment';
+import DateTimePicker from "react-datetime-picker";
+import moment from "moment";
 
 function AddFlightData() {
   const [flightType, setFlightType] = useState("");
@@ -17,7 +17,6 @@ function AddFlightData() {
   const [gate, setGate] = useState("");
   const [bag_claim, setBag_claim] = useState("");
   const [action, setAction] = useState("");
-
 
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
@@ -33,7 +32,6 @@ function AddFlightData() {
     setGate("");
     setBag_claim("");
     setAction("");
-
   }, [show]);
 
   const navigate = useNavigate();
@@ -51,7 +49,6 @@ function AddFlightData() {
       bag_claim,
       action,
     };
-
 
     try {
       const url = "http://localhost:8080/api/flights";
@@ -73,17 +70,11 @@ function AddFlightData() {
     window.location.reload();
   };
 
-
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
         Add
       </Button>
-
-      {/* <Button name="gate_btn" onClick={assignRandomGate}>
-        Get Gate
-      </Button> */}
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>

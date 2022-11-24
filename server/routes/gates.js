@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require("../db");
 var moment = require("moment");
+
 const { Gate } = require("../models/gateAssign");
 const { AllGatesDetails } = require("../models/gates");
 const { AddFlight } = require("../models/addFlight");
@@ -204,6 +205,120 @@ router.post("/random/assign", async (req, res) => {
     await AddFlight.findByIdAndUpdate(req.body.flight_id, {
       gate: gate.gate_number,
     });
+
+    res.send();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.post("/disable/gate", async (req, res) => {
+  console.log("BODY :", req.body);
+  try {
+    var new_start = req.body.startTime;
+    var new_end = req.body.endTime;
+    const gateToBeDisable = req.body.selectedGate;
+
+    // console.log("new start: ", new_start);
+    // console.log("new end: ", new_end);
+
+    console.log("gateToBeDisable: ", gateToBeDisable);
+
+    var data = await AllGatesDetails.find();
+    var gate = {};
+    var booked = 0;
+
+    data.forEach((gate) => {
+      if (gate.gate_number === gateToBeDisable) {
+        console.log("Gate number found from backend");
+      }
+    });
+
+    const gateData = await AllGatesDetails.findOne({
+      gate_number: gateToBeDisable,
+    });
+
+    var bookingArr = gateData.booking;
+    // console.log("One gate data :", bookingArr);
+
+    bookingArr.forEach((g) => {
+      console.log("new_start :", new_start);
+      console.log("new_end :", new_end);
+      console.log("----------------------");
+      console.log("time from :", g.time_from);
+      console.log("Time to :", g.time_to);
+
+      // if (moment(new_start).isBetween(g.time_from, g.time_to)) {
+      //   console.log(" 1 Condition matched");
+      // } else if (moment(new_end).isBetween(g.time_from, g.time_to)) {
+      //   console.log(" 2 Condition matched");
+      // } else if (
+      //   moment(g.time_to).isBetween(moment(new_start), moment(new_end))
+      // ) {
+      //   console.log(" 3Condition matched");
+      // } else if (
+      //   moment(g.time_from).isBetween(moment(new_start), moment(new_end))
+      // ) {
+      //   console.log(" 4 Condition matched");
+      // } else {
+      //   console.log("None of the above conditions mathced ");
+      // }
+      if (
+        moment(new_start).isBetween(g.time_from, g.time_to) ||
+        moment(new_end).isBetween(g.time_from, g.time_to) ||
+        moment(g.time_to).isBetween(moment(new_start), moment(new_end)) ||
+        moment(g.time_from).isBetween(moment(new_start), moment(new_end))
+      ) {
+        booked = 1;
+        console.log("Time is overlapping ");
+
+        return;
+      }
+    });
+
+    if (booked == 0) {
+      bookingArr.push({
+        time_from: new_start,
+        time_to: new_end,
+        gate_status: "Under Maintenance",
+      });
+      gateData.save();
+      // res.send();
+    }
+
+    // gateData.booking.forEach((g) => {
+    //   console.log("G :", g.time_from, "ID: ", g._id)
+    //   console.log("Booked :", booked)
+
+    //   if (booked == 0) {
+    //     Object.keys(g).forEach((time) => {
+
+    //       if (
+    //         moment(new_start).isBetween(time.end, time.start) ||
+    //         moment(new_end).isBetween(time.end, time.start) ||
+    //         moment(time.end).isBetween(moment(new_start), moment(new_end)) ||
+    //         moment(time.start).isBetween(moment(new_start), moment(new_end))
+    //       ) {
+    //         booked = 1;
+    //       }
+    //     });
+
+    //     // if (booked == 0) {
+    //     //   gate = g;
+    //     //   console.log("GATE :", gate)
+    //     //   booked = 1;
+    //     // }
+    //   }
+    // });
+    // gate.booking.push({
+    //   time_from: new_start,
+    //   time_to: new_end,
+    //   gate_status: "Under Maintenance",
+    // });
+    // gate.save();
+    // await AddFlight.updateOne({
+    //   gate: gate.gate_number,
+    // });
 
     res.send();
   } catch (error) {
