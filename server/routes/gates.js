@@ -226,14 +226,13 @@ router.post("/disable/gate", async (req, res) => {
 
     var data = await AllGatesDetails.find();
     var gate = {};
-    var booked = 0;
 
     data.forEach((gate) => {
       if (gate.gate_number === gateToBeDisable) {
         console.log("Gate number found from backend");
       }
     });
-
+    var booked = 0;
     const gateData = await AllGatesDetails.findOne({
       gate_number: gateToBeDisable,
     });
@@ -271,8 +270,6 @@ router.post("/disable/gate", async (req, res) => {
       ) {
         booked = 1;
         console.log("Time is overlapping ");
-
-        return;
       }
     });
 
@@ -283,44 +280,11 @@ router.post("/disable/gate", async (req, res) => {
         gate_status: "Under Maintenance",
       });
       gateData.save();
+      res.send(200);
       // res.send();
     }
 
-    // gateData.booking.forEach((g) => {
-    //   console.log("G :", g.time_from, "ID: ", g._id)
-    //   console.log("Booked :", booked)
-
-    //   if (booked == 0) {
-    //     Object.keys(g).forEach((time) => {
-
-    //       if (
-    //         moment(new_start).isBetween(time.end, time.start) ||
-    //         moment(new_end).isBetween(time.end, time.start) ||
-    //         moment(time.end).isBetween(moment(new_start), moment(new_end)) ||
-    //         moment(time.start).isBetween(moment(new_start), moment(new_end))
-    //       ) {
-    //         booked = 1;
-    //       }
-    //     });
-
-    //     // if (booked == 0) {
-    //     //   gate = g;
-    //     //   console.log("GATE :", gate)
-    //     //   booked = 1;
-    //     // }
-    //   }
-    // });
-    // gate.booking.push({
-    //   time_from: new_start,
-    //   time_to: new_end,
-    //   gate_status: "Under Maintenance",
-    // });
-    // gate.save();
-    // await AddFlight.updateOne({
-    //   gate: gate.gate_number,
-    // });
-
-    res.send();
+    res.status(400).send("Already");
   } catch (error) {
     console.log(error);
   }

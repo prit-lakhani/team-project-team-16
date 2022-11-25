@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 import DateTimePicker from "react-datetime-picker";
 import moment from "moment";
+import { Alert } from "bootstrap";
 
 const EnableDisableGate = () => {
   const [flightType, setFlightType] = useState("");
@@ -163,6 +164,7 @@ const EnableDisableGate = () => {
         const url = "http://localhost:8080/api/gates/disable/gate";
         await axios.post(url, gateObj);
       } catch (error) {
+        window.alert("ondonsdofn");
         console.log(error);
       }
     };
