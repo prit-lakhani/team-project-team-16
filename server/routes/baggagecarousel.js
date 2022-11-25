@@ -3,7 +3,7 @@ const db = require("../db");
 var moment = require("moment");
 const { AllBaggageCaros } = require("../models/baggage");
 const { AddFlight } = require("../models/addFlight");
-
+//returns all the available baggae carousels available
 router.post("/allbaggages", async (req, res) => {
   try {
     const letterArr = ["C"];
