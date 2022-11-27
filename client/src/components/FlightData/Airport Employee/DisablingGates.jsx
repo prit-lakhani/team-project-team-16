@@ -37,7 +37,7 @@ const EnableDisableGate = () => {
     setBag_claim("");
     setAction("");
   }, [show]);
-
+//Creating all gates
   const allGates = [
     "A1",
     "A2",
@@ -148,6 +148,7 @@ const EnableDisableGate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //Disabeling gates
     const disableGate = async (flightT) => {
       const gateObj = {
         startTime: moment(startTime).format("lll"),
