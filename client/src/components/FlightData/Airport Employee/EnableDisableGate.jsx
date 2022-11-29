@@ -164,7 +164,7 @@ const EnableDisableGate = () => {
         const url = "http://localhost:8080/api/gates/disable/gate";
         await axios.post(url, gateObj);
       } catch (error) {
-        window.alert("ondonsdofn");
+        window.alert("Error", error);
         console.log(error);
       }
     };
@@ -191,7 +191,7 @@ const EnableDisableGate = () => {
           onSubmit={(e) => {
             isValidGate(e);
             handleSubmit(e);
-            // refreshPage();
+            refreshPage();
           }}
         >
           <Modal.Body>

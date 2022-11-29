@@ -238,7 +238,6 @@ router.post("/disable/gate", async (req, res) => {
     });
 
     var bookingArr = gateData.booking;
-    // console.log("One gate data :", bookingArr);
 
     bookingArr.forEach((g) => {
       console.log("new_start :", new_start);
@@ -284,7 +283,7 @@ router.post("/disable/gate", async (req, res) => {
       // res.send();
     }
 
-    res.status(400).send("Already");
+    res.status(400).send("Already ");
   } catch (error) {
     console.log(error);
   }

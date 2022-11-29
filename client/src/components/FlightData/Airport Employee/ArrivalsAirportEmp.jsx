@@ -91,7 +91,11 @@ const ArrivalsAirportEmp = () => {
         {<option label="Next 4 hours" value="4"></option>}
       </select>
 
-      <button className="btn btn-info" onClick={() => navigate("/GateDetails")}>
+      <button
+        style={{ float: "right", marginRight: "15px" }}
+        className="btn btn-info"
+        onClick={() => navigate("/GateDetails")}
+      >
         Gate details
       </button>
 
@@ -129,44 +133,6 @@ const ArrivalsAirportEmp = () => {
                 </tr>
               );
             })}
-          </tbody>
-        </Table>
-      }
-    </div>
-  );
-};
-
-const gateDwtails = () => {
-  console.log("Hello from outside of the main function");
-  return (
-    <div>
-      {
-        <Table responsive>
-          <thead>
-            Arrivals Airport Employee
-            <tr>
-              <th>ID</th>
-              <th>Airline</th>
-              <th>Arriving From</th>
-              <th>Flight Type</th>
-              <th>time</th>
-              <th>Terminal</th>
-              <th>Gate</th>
-              <th>Baggage Claim</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {/* <td>{i}</td>
-              <td>{formatted_id}</td>
-              <td>{flight.airline}</td>
-              <td>{flight.arriving_from}</td>
-              <td>{flight.flight_type}</td>
-              <td>{flight.time}</td>
-              <td>{flight.terminal}</td>
-              <td>{flight.gate}</td>
-              <td>{flight.bag_claim}</td> */}
-            </tr>
           </tbody>
         </Table>
       }

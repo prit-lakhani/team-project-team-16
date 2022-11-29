@@ -1,27 +1,49 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import EnableDisableGate from "./EnableDisableGate";
+import Main from "../../Main";
 
 const GateDetails = () => {
   const navigate = useNavigate();
   const [Gates, setGates] = useState([]);
 
-  const gettingGates = async (req, res) => {
+  useEffect(async (req, res) => {
     const gates = await axios.get("http://localhost:8080/api/gates/getgates");
     // console.log("Data:", gates.data);
     setGates(gates.data);
-  };
+  }, []);
+
+  // const gettingGates = async (req, res) => {
+  //   const gates = await axios.get("http://localhost:8080/api/gates/getgates");
+  //   // console.log("Data:", gates.data);
+  //   setGates(gates.data);
+  // };
 
   return (
     <div>
-      <div>Gate Details </div>
-      <EnableDisableGate />
-      <h1 style={{ color: "green" }}>A Computer Science portal for geeks.</h1>
-      <button onClick={() => navigate(-1)}>Go Back Home</button>
-      <button onClick={gettingGates}>Gates</button>
-      <button>Enable/Disable Gate</button>
+      <Main />
+      <div style={{ float: "right" }}>
+        <button
+          style={{ marginRight: "15px" }}
+          onClick={() => navigate(-1)}
+          className="btn btn-warning"
+        >
+          Go Back
+        </button>
+        <span style={{ marginRight: "15px" }}>
+          <EnableDisableGate />
+        </span>
+
+        {/* <button
+          className="btn btn-primary"
+          style={{ float: "right" }}
+          onClick={gettingGates}
+        >
+          Gates
+        </button> */}
+      </div>
 
       {Gates.map((gate) => {
         console.log(gate);
