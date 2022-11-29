@@ -9,6 +9,7 @@ import AddFlightData from "../AddFlightDetails";
 import GetCurrentTime from "../../Time/GetCurrentTime";
 import moment from "moment";
 import DateTimePicker from "react-datetime-picker";
+import "./styles.css";
 
 const ArrivalsAirlineEmp = () => {
   const [Flights, setFlightDetails] = useState([]);
@@ -203,6 +204,11 @@ const ArrivalsAirlineEmp = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const styles = {
+    display: "flex",
+    justifyContent: "space-evenly",
   };
 
   {
@@ -410,7 +416,7 @@ const ArrivalsAirlineEmp = () => {
               <th>Terminal</th>
               <th>Gate</th>
               <th>Baggage Claim</th>
-              <th>Action</th>
+              <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -429,7 +435,7 @@ const ArrivalsAirlineEmp = () => {
                   <td>{flight.terminal}</td>
                   <td>{flight.gate}</td>
                   <td>{flight.bag_claim}</td>
-                  <td>
+                  <td style={styles}>
                     <button
                       className="btn btn-warning"
                       name="edit"

@@ -222,6 +222,11 @@ const DeparturesAirlineEmp = () => {
     }
   };
 
+  const styles = {
+    display: "flex",
+    justifyContent: "space-evenly",
+  };
+
   console.log(Flights);
   {
     return (
@@ -436,7 +441,7 @@ const DeparturesAirlineEmp = () => {
               <th>Time</th>
               <th>Terminal</th>
               <th>Gate</th>
-              <th>Action</th>
+              <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -454,7 +459,7 @@ const DeparturesAirlineEmp = () => {
                   <td>{flight.time}</td>
                   <td>{flight.terminal}</td>
                   <td>{flight.gate}</td>
-                  <td>
+                  <td styles={styles}>
                     <button
                       name="edit"
                       className="btn btn-warning"

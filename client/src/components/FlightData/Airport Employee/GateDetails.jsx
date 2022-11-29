@@ -44,6 +44,29 @@ const GateDetails = () => {
     }
   };
 
+  const NestedTable = () => {
+    return (
+      <div>
+        <table>
+          <thead>
+            Nested Table
+            <tr>
+              <th>test</th>
+              <th>test</th>
+              <th>test</th>
+              <th>test</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
   return (
     <div>
       <Main />
@@ -63,7 +86,7 @@ const GateDetails = () => {
       </div>
 
       {Gates.map((gate) => {
-        console.log(gate);
+        // console.log(gate);
       })}
       {
         <Table responsive>
@@ -81,6 +104,18 @@ const GateDetails = () => {
           </thead>
           <tbody>
             {Gates.map((gate) => {
+              const jsonGate = JSON.stringify(gate);
+              console.log("JSON GATE :", jsonGate);
+
+              // {
+              //   const jsonTest = () => {
+              //     jsonGate.booking.map((gate) => {
+              //       console.log("GATES...", gate);
+              //     });
+              //   };
+              //   jsonTest();
+              // }
+
               return (
                 <tr>
                   <td>{gate._id}</td>
