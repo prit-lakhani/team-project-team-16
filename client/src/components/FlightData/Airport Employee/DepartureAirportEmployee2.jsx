@@ -5,7 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import dynamicURL from "../../../Utils/urlConfig";
-
+//integrating the api for the airport employees from the DB
 const DeparturesAirportEmp = () => {
   const [Flights, setFlightDetails] = useState([]);
   const [TimeViseFlights, setTimeViseFlights] = useState("0");
@@ -24,7 +24,7 @@ const DeparturesAirportEmp = () => {
     getFlightDetails();
   }, []);
 
-  //checking time conflicts based on user and flight time.
+ 
   const checkTime = (userTime, flightTime) => {
     var pTime = parseInt(userTime, 10);
     if (pTime <= 0) {
