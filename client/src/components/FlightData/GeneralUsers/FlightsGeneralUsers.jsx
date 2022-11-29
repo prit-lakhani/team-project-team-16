@@ -76,7 +76,7 @@ const GeneralUsers = () => {
           <thead>
             {/* <AddFlightData /> */}
             GeneralUsers
-            <tr>
+            <tr style={{ backgroundColor: "#3bb19b7a" }}>
               <th>ID</th>
               <th>Airline</th>
               <th>Arriving From</th>

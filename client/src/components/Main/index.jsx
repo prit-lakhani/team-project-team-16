@@ -12,7 +12,9 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import ArrivalsAirportEmp from "../FlightData/Airport Employee/ArrivalsAirportEmp";
 import DeparturesAirportEmp from "../FlightData/Airport Employee/DeparturesAirportEmp";
 import { Button } from "bootstrap";
+import { Badge } from "react-bootstrap";
 import "./custom.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -39,16 +41,15 @@ const Main = () => {
 
   console.log("User role :", user);
 
-
   const handleNavigate = (page) => {
     var path = "/";
     console.log(user.role);
     if (user.role === "User") {
-      path += "user"
+      path += "user";
     } else if (user.role === "Airline Employee") {
-      path += "employee"
+      path += "employee";
     } else if (user.role === "Airport Employee") {
-      path += "airportemp"
+      path += "airportemp";
     }
     path += "/" + page;
     navigate(path);
@@ -57,18 +58,20 @@ const Main = () => {
   const myComponentStyle = {
     marginRight: 10,
     marginTop: 5,
-  }
+  };
 
   return (
-    <div className={styles.main_container} >
-
-
-
+    <div className={styles.main_container}>
       <nav className={styles.navbar}>
-        <h1>Welcome back {user.firstName}</h1>
-        <p>({user.role})</p>
-        <h2>Flight details...</h2>
+        <span>
+          <h4 style={{ marginTop: "15px" }}>
+            Welcome back,
+            <span className="badge badge-light">{user.firstName}</span>
+          </h4>
+          <p>({user.role})</p>
+        </span>
 
+        <h3>Airport Management System</h3>
 
         {/* <span
           style={{
@@ -104,27 +107,34 @@ const Main = () => {
       </nav>
 
       <div className="cus_btn">
-        <button type="button" style={myComponentStyle} className="btn btn-primary custom-btn" name="arrivals" onClick={() => handleNavigate("arrivals")}>Arrivals</button>
-        <button type="button" className="btn btn-primary custom-btn " name="departures" onClick={() => handleNavigate("departures")}>Departures</button>
+        <button
+          type="button"
+          style={myComponentStyle}
+          className="btn btn-primary custom-btn"
+          name="arrivals"
+          onClick={() => handleNavigate("arrivals")}
+        >
+          Arrivals
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary custom-btn "
+          name="departures"
+          onClick={() => handleNavigate("departures")}
+        >
+          Departures
+        </button>
       </div>
-
-
 
       <Routes>
         {user.role === "User" && (
           <Route path="/user/arrivals" element={<ArrivalsGeneralUsers />} />
         )}
         {user.role === "User" && (
-          <Route
-            path="/user/departures"
-            element={<DeparturesGeneralUsers />}
-          />
+          <Route path="/user/departures" element={<DeparturesGeneralUsers />} />
         )}
         {user.role === "Airline Employee" && (
-          <Route
-            path="/employee/arrivals"
-            element={<ArrivalsAirlineEmp />}
-          />
+          <Route path="/employee/arrivals" element={<ArrivalsAirlineEmp />} />
         )}
         {user.role === "Airline Employee" && (
           <Route
@@ -133,10 +143,7 @@ const Main = () => {
           />
         )}
         {user.role === "Airport Employee" && (
-          <Route
-            path="/airportemp/arrivals"
-            element={<ArrivalsAirportEmp />}
-          />
+          <Route path="/airportemp/arrivals" element={<ArrivalsAirportEmp />} />
         )}
         {user.role === "Airport Employee" && (
           <Route
@@ -145,21 +152,22 @@ const Main = () => {
           />
         )}
       </Routes>
-    </div >
+    </div>
   );
 };
 
 export default Main;
 
-
-
-
-
-
-{/* <GetCurrentTime getNewTime={setNewTime} getCurrTime={setCurrTime} /> */ }
-{/* <GetCurrentTime getNewTime={getNewTime} /> */ }
-{/* {user.role === "User" && getArrivals !== "departures" && <ArrivalsGeneralUsers />}
+{
+  /* <GetCurrentTime getNewTime={setNewTime} getCurrTime={setCurrTime} /> */
+}
+{
+  /* <GetCurrentTime getNewTime={getNewTime} /> */
+}
+{
+  /* {user.role === "User" && getArrivals !== "departures" && <ArrivalsGeneralUsers />}
       {user.role === "User" && getArrivals === "departures" && <DeparturesGeneralUsers />}
 
       {user.role === "Airline Employee" && getArrivals !== "departures" && < ArrivalsAirlineEmp />}
-      {user.role === "Airline Employee" && getArrivals === "departures" && < DeparturesAirlineEmp />} */}
+      {user.role === "Airline Employee" && getArrivals === "departures" && < DeparturesAirlineEmp />} */
+}

@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Table } from "react-bootstrap";
-import EnableDisableGate from "./EnableDisableGate";
+import { Table, Button } from "react-bootstrap";
+import EnableDisableGate from "./DisableGate";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Main from "../../Main";
 
 const GateDetails = () => {
@@ -15,34 +18,48 @@ const GateDetails = () => {
     setGates(gates.data);
   }, []);
 
+  const refreshPage = () => {
+    window.location.reload();
+    toast("Wow so easy!");
+    // window.alert("Operation perfromed successfully");
+  };
+  // const notify = () => toast("Wow so easy!");
+
   // const gettingGates = async (req, res) => {
   //   const gates = await axios.get("http://localhost:8080/api/gates/getgates");
   //   // console.log("Data:", gates.data);
   //   setGates(gates.data);
   // };
 
+  const enableGate = async (e) => {
+    // console.log("Enable Gate ID : ", e.target.value);
+
+    try {
+      const url =
+        "http://localhost:8080/api/gates/enable/gate/" + e.target.value;
+      const GateToBeEnable = await axios.get(url);
+      console.log("GateToBeEnable : ", GateToBeEnable);
+    } catch (error) {
+      window.alert("Error :", error);
+    }
+  };
+
   return (
     <div>
       <Main />
-      <div style={{ float: "right" }}>
+
+      <ToastContainer />
+      <div>
         <button
-          style={{ marginRight: "15px" }}
+          style={{ marginRight: "15px", float: "left" }}
           onClick={() => navigate(-1)}
           className="btn btn-warning"
         >
           Go Back
         </button>
-        <span style={{ marginRight: "15px" }}>
+        <span style={{ marginRight: "10px", float: "right" }}>
           <EnableDisableGate />
         </span>
-
-        {/* <button
-          className="btn btn-primary"
-          style={{ float: "right" }}
-          onClick={gettingGates}
-        >
-          Gates
-        </button> */}
       </div>
 
       {Gates.map((gate) => {
@@ -52,13 +69,14 @@ const GateDetails = () => {
         <Table responsive>
           <thead>
             Arrivals Airport Employee
-            <tr>
+            <tr style={{ backgroundColor: "#3bb19b7a" }}>
               <th>Gate ID</th>
               <th>Gate Number</th>
               <th>Time From</th>
               <th>Time To</th>
               <th>Gate Status</th>
               <th>Flight ID</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -71,6 +89,23 @@ const GateDetails = () => {
                   <td>{gate.booking.map((book) => book.time_to)}</td>
                   <td>{gate.booking.map((book) => book.gate_status)}</td>
                   <td>{gate.booking.map((book) => book.flight_id)}</td>
+                  <td>
+                    {gate.booking.map((book) => book.time_from).length > 0 &&
+                    gate.booking.map((book) => book.gate_status) != "Booked" ? (
+                      <Button
+                        value={gate._id}
+                        onClick={(e) => {
+                          enableGate(e);
+                          refreshPage();
+                        }}
+                        className="btn btn-success"
+                      >
+                        Enable Gate
+                      </Button>
+                    ) : (
+                      <td></td>
+                    )}
+                  </td>
                 </tr>
               );
             })}

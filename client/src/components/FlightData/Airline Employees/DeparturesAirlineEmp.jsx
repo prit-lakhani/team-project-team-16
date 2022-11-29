@@ -428,7 +428,7 @@ const DeparturesAirlineEmp = () => {
           <thead>
             Departures
             <AddFlightData />
-            <tr>
+            <tr style={{ backgroundColor: "#3bb19b7a" }}>
               <th>ID</th>
               <th>Airline</th>
               <th>Departing to</th>

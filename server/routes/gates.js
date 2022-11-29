@@ -234,7 +234,7 @@ router.post("/disable/gate", async (req, res) => {
     });
     var booked = 0;
     const gateData = await AllGatesDetails.findOne({
-      gate_number: gateToBeDisable,
+      gate_number: gateToBeDisable.toUpperCase(),
     });
 
     var bookingArr = gateData.booking;
@@ -280,13 +280,25 @@ router.post("/disable/gate", async (req, res) => {
       });
       gateData.save();
       res.send(200);
-      // res.send();
     }
 
     res.status(400).send("Already ");
   } catch (error) {
     console.log(error);
   }
+});
+
+router.get("/enable/gate/:id", async (req, res) => {
+  const gateData = await AllGatesDetails.findOne({ _id: req.params.id });
+  var gate = gateData.booking.filter(
+    (g) => g.gate_status != "Under Maintenance"
+  );
+  gateData.booking = gate;
+  gateData.save();
+
+  res.send(gate);
+
+  console.log("Enable gate id : ", req.params.id);
 });
 
 router.post("/allgates", async (req, res) => {

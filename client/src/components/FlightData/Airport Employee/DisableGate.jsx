@@ -148,12 +148,12 @@ const EnableDisableGate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("GateNUMBER : ", selectedGate);
-    console.log("Time from :", startTime);
-    console.log("Time from :", endTime);
+    // console.log("GateNUMBER : ", selectedGate);
+    // console.log("Time from :", startTime);
+    // console.log("Time from :", endTime);
 
     const disableGate = async (flightT) => {
-      console.log("disable function ....");
+      // console.log("disable function ....");
       const gateObj = {
         startTime: moment(startTime).format("lll"),
         endTime: moment(endTime).format("lll"),
@@ -180,11 +180,11 @@ const EnableDisableGate = () => {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Enable/Disable Gate
+        Disable Gate
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton style={{ backgroundColor: "#3bb19b7a" }}>
           <Modal.Title>Add Gate Details</Modal.Title>
         </Modal.Header>
         <form
@@ -244,7 +244,13 @@ const EnableDisableGate = () => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <button type="submit" variant="primary" value={selectedGate}>
+            <button
+              type="submit"
+              variant="primary"
+              value={selectedGate}
+              className="btn btn-success"
+              // onClick={refreshPage()}
+            >
               Save Changes
             </button>
           </Modal.Footer>

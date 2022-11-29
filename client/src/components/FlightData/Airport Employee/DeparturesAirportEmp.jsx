@@ -92,7 +92,7 @@ const DeparturesAirportEmp = () => {
         <Table responsive>
           <thead>
             Departures Airport Employee
-            <tr>
+            <tr style={{ backgroundColor: "#3bb19b7a" }}>
               <th>ID</th>
               <th>Airline</th>
               <th>Arriving From</th>
