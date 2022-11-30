@@ -44,7 +44,7 @@ exports.get_flights = (req,res)=> {
 };
 
 
-
+//Setting the baggage carousel based on the flight 
 exports.set_baggage = (req,res) => {
     Flights.find({baggage:req.body.baggage})
     .exec()
@@ -65,6 +65,10 @@ exports.set_baggage = (req,res) => {
                         res.status(409).json({error:'This Flight has already been assigned a baggage counter'});
                         return;
                     }
+                    /*else{
+                        res.status(409).json({error:'This Flight has already been assigned a baggage counter'});
+                        return;
+                    }*/
                    
                 }else{
                     res.status(400).json({'Error':'Please re-enter the correct flight information'});
