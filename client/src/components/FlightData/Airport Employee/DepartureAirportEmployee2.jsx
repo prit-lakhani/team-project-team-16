@@ -45,7 +45,7 @@ const DeparturesAirportEmp = () => {
     }
 
     console.log("flight :", flight.format("HH:DD"));
-
+    //Checking Date for flights
     if (flight.isSameOrAfter(now) && flight.isSameOrBefore(user)) {
       console.log("Can display these flights");
       return true;

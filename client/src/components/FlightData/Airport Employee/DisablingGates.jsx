@@ -157,6 +157,7 @@ const EnableDisableGate = () => {
       };
 
       try {
+        //Url to hit disable gate api
         const url = `${dynamicURL}/api/gates/disable/gate`;
         await axios.post(url, gateObj);
       } catch (error) {

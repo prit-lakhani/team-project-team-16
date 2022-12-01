@@ -162,6 +162,7 @@ router.post("/addgate", async (req, res) => {
   }
 });
 
+//Creating API to randomly assign gates
 router.post("/random/assign", async (req, res) => {
   try {
     var new_start = req.body.time;
@@ -185,6 +186,7 @@ router.post("/random/assign", async (req, res) => {
     data.forEach((g) => {
       if (booked == 0) {
         g.booking.forEach((time) => {
+            //Checking for time conflicts
           if (
             moment(new_start).isBetween(time.end, time.start) ||
             moment(new_end).isBetween(time.end, time.start) ||
@@ -201,7 +203,7 @@ router.post("/random/assign", async (req, res) => {
         }
       }
     });
-
+    //Udating booking array
     gate.booking.push({
       time_from: new_start,
       time_to: new_end,
@@ -209,6 +211,7 @@ router.post("/random/assign", async (req, res) => {
       gate_status: "Booked",
     });
     gate.save();
+    //Udating flight detials in flight table
     await AddFlight.findByIdAndUpdate(req.body.flight_id, {
       gate: gate.gate_number,
     });
