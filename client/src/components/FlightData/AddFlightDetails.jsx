@@ -157,7 +157,7 @@ function AddFlightData() {
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
-                <Form.Label>Terminal</Form.Label>
+                <Form.Label>Terminal : </Form.Label>
 
                 <select
                   name="terminal"
@@ -166,7 +166,7 @@ function AddFlightData() {
                   onChange={(e) => setTerminal(e.target.value)}
                   value={terminal}
                 >
-                  <option>Select Terminal</option>
+                  <option> Select Terminal</option>
                   <option label="T1" value="T1"></option>
                   <option label="T2" value="T2"></option>
                   <option label="T3" value="T3"></option>
@@ -174,7 +174,7 @@ function AddFlightData() {
 
                 {/* <p>Terminal : {data.Terminal}</p> */}
               </Form.Group>
-              <Form.Group
+              {/* <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
@@ -188,7 +188,7 @@ function AddFlightData() {
                   onChange={(e) => setGate(e.target.value)}
                   autoFocus
                 />
-              </Form.Group>
+              </Form.Group> */}
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
@@ -204,7 +204,7 @@ function AddFlightData() {
                   autoFocus
                 />
               </Form.Group>
-              <Form.Group
+              {/* <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
@@ -218,7 +218,7 @@ function AddFlightData() {
                   onChange={(e) => setAction(e.target.value)}
                   autoFocus
                 />
-              </Form.Group>
+              </Form.Group> */}
             </Form>
           </Modal.Body>
 
@@ -226,7 +226,12 @@ function AddFlightData() {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <button type="submit" variant="primary" onClick={refreshPage}>
+            <button
+              type="submit"
+              variant="primary"
+              className="btn btn-success"
+              onClick={refreshPage}
+            >
               Save Changes
             </button>
           </Modal.Footer>

@@ -82,20 +82,20 @@ const DeparturesAirportEmp = () => {
         {<option label="Next 4 hours" value="4"></option>}
       </select>
       <button
-        style={{ float: "right", marginRight: "15px" }}
+        style={{ float: "right", marginRight: "15px", marginTop: "-20px" }}
         className="btn btn-info"
         onClick={() => navigate("/GateDetails")}
       >
         Gate details
       </button>
       {
-        <Table responsive>
+        <Table responsive bordered>
           <thead>
-            Departures Airport Employee
+            {/* Departures Airport Employee */}
             <tr style={{ backgroundColor: "#3bb19b7a" }}>
               <th>ID</th>
               <th>Airline</th>
-              <th>Arriving From</th>
+              <th>Departing to</th>
               <th>Flight Type</th>
               <th>time</th>
               <th>Terminal</th>

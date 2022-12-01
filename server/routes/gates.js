@@ -106,7 +106,7 @@ router.post("/assign", async (req, res) => {
 router.get("/getgates", async (req, res) => {
   try {
     const gate = await AllGatesDetails.find();
-    console.log("Gates:", gate);
+    // console.log("Gates:", gate);
     if (gate.length > 0) {
       return res.send(gate);
     } else {
@@ -288,17 +288,27 @@ router.post("/disable/gate", async (req, res) => {
   }
 });
 
-router.get("/enable/gate/:id", async (req, res) => {
-  const gateData = await AllGatesDetails.findOne({ _id: req.params.id });
-  var gate = gateData.booking.filter(
-    (g) => g.gate_status != "Under Maintenance"
-  );
+router.post("/enable/gate/:id", async (req, res) => {
+  // console.log("Gate body : ", req.params.id);
+  console.log("Gate body : ", req.body.sendData.gateid);
+  console.log("book id : ", req.body.sendData.bookid);
+
+  const gateData = await AllGatesDetails.findOne({
+    _id: req.body.sendData.gateid,
+  });
+  // res.send();
+  console.log("gateData : ", gateData);
+  // const gggg = gateData.booking.map((m) => {
+  //   console.log(m);
+  // });
+  var gate = gateData.booking.filter((g) => g._id != req.body.sendData.bookid);
+  // console.log("Filtered :", gate);
+
   gateData.booking = gate;
+
   gateData.save();
 
   res.send(gate);
-
-  console.log("Enable gate id : ", req.params.id);
 });
 
 router.post("/allgates", async (req, res) => {

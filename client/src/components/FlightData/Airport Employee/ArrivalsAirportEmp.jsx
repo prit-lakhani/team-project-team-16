@@ -92,7 +92,7 @@ const ArrivalsAirportEmp = () => {
       </select>
 
       <button
-        style={{ float: "right", marginRight: "15px" }}
+        style={{ float: "right", marginRight: "15px", marginTop: "-20px" }}
         className="btn btn-info"
         onClick={() => navigate("/GateDetails")}
       >
@@ -100,9 +100,9 @@ const ArrivalsAirportEmp = () => {
       </button>
 
       {
-        <Table responsive>
+        <Table responsive bordered>
           <thead>
-            Arrivals Airport Employee
+            {/* Arrivals Airport Employee */}
             <tr style={{ backgroundColor: "#3bb19b7a" }}>
               <th>ID</th>
               <th>Airline</th>

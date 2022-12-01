@@ -78,43 +78,45 @@ const DeparturesGeneralUsers = () => {
         {<option label="Next 4 hours" value="4"></option>}
       </select>
       {
-        <Table responsive>
-          <thead>
-            DeparturesGeneralUsers
-            <tr style={{ backgroundColor: "#3bb19b7a" }}>
-              <th>ID</th>
-              <th>Airline</th>
-              <th>Arriving From</th>
-              <th>Flight Type</th>
-              <th>time</th>
-              <th>Terminal</th>
-              <th>Gate</th>
-              {/* <th>Baggage Claim</th> */}
-              {/* <th></th>
+        <div style={{ marginLeft: "20px", marginRight: "20px" }}>
+          <Table responsive bordered striped>
+            <thead>
+              {/* DeparturesGeneralUsers */}
+              <tr style={{ backgroundColor: "#3bb19b7a" }}>
+                <th>ID</th>
+                <th>Airline</th>
+                <th>Arriving From</th>
+                <th>Flight Type</th>
+                <th>time</th>
+                <th>Terminal</th>
+                <th>Gate</th>
+                {/* <th>Baggage Claim</th> */}
+                {/* <th></th>
                             <th></th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {Flights.map((flight) => {
-              const formatted_id = flight._id.slice(-6).toUpperCase();
-              return !checkTime(TimeViseFlights, flight.time) ? (
-                <tr></tr>
-              ) : (
-                <tr>
-                  {/* <td>{i}</td> */}
-                  <td>{formatted_id}</td>
-                  <td>{flight.airline}</td>
-                  <td>{flight.arriving_from}</td>
-                  <td>{flight.flight_type}</td>
-                  <td>{flight.time}</td>
-                  <td>{flight.terminal}</td>
-                  <td>{flight.gate}</td>
-                  {/* <td>{flight.bag_claim}</td> */}
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+              </tr>
+            </thead>
+            <tbody>
+              {Flights.map((flight) => {
+                const formatted_id = flight._id.slice(-6).toUpperCase();
+                return !checkTime(TimeViseFlights, flight.time) ? (
+                  <tr></tr>
+                ) : (
+                  <tr>
+                    {/* <td>{i}</td> */}
+                    <td>{formatted_id}</td>
+                    <td>{flight.airline}</td>
+                    <td>{flight.arriving_from}</td>
+                    <td>{flight.flight_type}</td>
+                    <td>{flight.time}</td>
+                    <td>{flight.terminal}</td>
+                    <td>{flight.gate}</td>
+                    {/* <td>{flight.bag_claim}</td> */}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
       }
     </div>
   );

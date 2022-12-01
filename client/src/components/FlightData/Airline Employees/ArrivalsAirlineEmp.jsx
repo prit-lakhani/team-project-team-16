@@ -227,7 +227,6 @@ const ArrivalsAirlineEmp = () => {
           {<option label="Next 2 hours" value="2"></option>}
           {<option label="Next 4 hours" value="4"></option>}
         </select>
-
         {
           <Modal show={show} onHide={handleClose} animation={false}>
             <Modal.Header closeButton>
@@ -343,7 +342,7 @@ const ArrivalsAirlineEmp = () => {
 
                     {/* <p>Terminal : {data.Terminal}</p> */}
                   </Form.Group>
-                  <Form.Group
+                  {/* <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
@@ -357,7 +356,7 @@ const ArrivalsAirlineEmp = () => {
                       onChange={(e) => setUpdateGate(e.target.value)}
                       autoFocus
                     />
-                  </Form.Group>
+                  </Form.Group> */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
@@ -373,7 +372,7 @@ const ArrivalsAirlineEmp = () => {
                       autoFocus
                     />
                   </Form.Group>
-                  <Form.Group
+                  {/* <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
@@ -387,7 +386,7 @@ const ArrivalsAirlineEmp = () => {
                       onChange={(e) => setUpdateAction(e.target.value)}
                       autoFocus
                     />
-                  </Form.Group>
+                  </Form.Group> */}
                 </Form>
               </Modal.Body>
 
@@ -395,7 +394,11 @@ const ArrivalsAirlineEmp = () => {
                 <Button variant="secondary" onClick={handleClose}>
                   Close
                 </Button>
-                <button type="submit" variant="primary">
+                <button
+                  type="submit"
+                  variant="primary"
+                  className="btn btn-primary"
+                >
                   Update
                 </button>
               </Modal.Footer>
@@ -403,87 +406,94 @@ const ArrivalsAirlineEmp = () => {
           </Modal>
         }
 
-        <Table responsive>
-          <thead>
-            ArrivalsAirlineEmployees
-            <AddFlightData />
-            <tr style={{ backgroundColor: "#3bb19b7a" }}>
-              <th>ID</th>
-              <th>Airline</th>
-              <th>Arriving From</th>
-              <th>Flight Type</th>
-              <th>time</th>
-              <th>Terminal</th>
-              <th>Gate</th>
-              <th>Baggage Claim</th>
-              <th className="text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Flights.map((flight) => {
-              const formatted_id = flight._id.slice(-6).toUpperCase();
-              return !checkTime(TimeViseFlights, flight.time) ? (
-                <tr></tr>
-              ) : (
-                <tr>
-                  {/* <td>{i}</td> */}
-                  <td>{formatted_id}</td>
-                  <td>{flight.airline}</td>
-                  <td>{flight.arriving_from}</td>
-                  <td>{flight.flight_type}</td>
-                  <td>{flight.time}</td>
-                  <td>{flight.terminal}</td>
-                  <td>{flight.gate}</td>
-                  <td>{flight.bag_claim}</td>
-                  <td style={styles}>
-                    <button
-                      className="btn btn-warning"
-                      name="edit"
-                      value={flight._id}
-                      onClick={(e) => {
-                        handleShow(e);
-                        handleUpdate(e);
-                        handleDeleteGate(e);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      name="delete"
-                      id={flight._id}
-                      value={flight._id}
-                      onClick={(e) => {
-                        handleDeleteFlight(e);
-                        handleDeleteGate(e);
-                        refreshPage();
-                      }}
-                    >
-                      Delete
-                    </button>
-                    {flight.gate === "" ? (
+        <span
+          style={{ float: "right", marginRight: "15px", marginTop: "-20px" }}
+        >
+          <AddFlightData />
+        </span>
+        <div style={{ marginLeft: "20px", marginRight: "20px" }}>
+          <Table bordered responsive>
+            <thead>
+              {/* ArrivalsAirlineEmployees */}
+
+              <tr style={{ backgroundColor: "#3bb19b7a" }}>
+                <th>ID</th>
+                <th>Airline</th>
+                <th>Arriving From</th>
+                <th>Flight Type</th>
+                <th>time</th>
+                <th>Terminal</th>
+                <th>Gate</th>
+                <th>Baggage Claim</th>
+                <th className="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Flights.map((flight) => {
+                const formatted_id = flight._id.slice(-6).toUpperCase();
+                return !checkTime(TimeViseFlights, flight.time) ? (
+                  <tr></tr>
+                ) : (
+                  <tr>
+                    {/* <td>{i}</td> */}
+                    <td>{formatted_id}</td>
+                    <td>{flight.airline}</td>
+                    <td>{flight.arriving_from}</td>
+                    <td>{flight.flight_type}</td>
+                    <td>{flight.time}</td>
+                    <td>{flight.terminal}</td>
+                    <td>{flight.gate}</td>
+                    <td>{flight.bag_claim}</td>
+                    <td style={styles}>
                       <button
-                        className="btn btn-info"
-                        name="assign"
+                        className="btn btn-warning"
+                        name="edit"
+                        value={flight._id}
+                        onClick={(e) => {
+                          handleShow(e);
+                          handleUpdate(e);
+                          handleDeleteGate(e);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        name="delete"
                         id={flight._id}
                         value={flight._id}
                         onClick={(e) => {
-                          assignGate(flight).then((res) => {
-                            refreshPage();
-                          });
+                          handleDeleteFlight(e);
+                          handleDeleteGate(e);
+                          refreshPage();
                         }}
                       >
-                        Assign Gate
+                        Delete
                       </button>
-                    ) : (
-                      <p></p>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+                      {flight.gate === "" ? (
+                        <button
+                          className="btn btn-info"
+                          name="assign"
+                          id={flight._id}
+                          value={flight._id}
+                          onClick={(e) => {
+                            assignGate(flight).then((res) => {
+                              refreshPage();
+                            });
+                          }}
+                        >
+                          Assign Gate
+                        </button>
+                      ) : (
+                        <p></p>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
       </div>
     );
   }

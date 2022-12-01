@@ -6,6 +6,7 @@ import AddFlightData from "../AddFlightDetails";
 import DateTimePicker from "react-datetime-picker";
 import moment from "moment";
 import "bootstrap/dist/css/bootstrap.css";
+import "./styles.css";
 
 const DeparturesAirlineEmp = () => {
   const [Flights, setFlightDetails] = useState([]);
@@ -369,7 +370,7 @@ const DeparturesAirlineEmp = () => {
 
                     {/* <p>Terminal : {data.Terminal}</p> */}
                   </Form.Group>
-                  <Form.Group
+                  {/* <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
@@ -383,7 +384,7 @@ const DeparturesAirlineEmp = () => {
                       onChange={(e) => setUpdateGate(e.target.value)}
                       autoFocus
                     />
-                  </Form.Group>
+                  </Form.Group> */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
@@ -399,7 +400,7 @@ const DeparturesAirlineEmp = () => {
                       autoFocus
                     />
                   </Form.Group>
-                  <Form.Group
+                  {/* <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
@@ -413,7 +414,7 @@ const DeparturesAirlineEmp = () => {
                       onChange={(e) => setUpdateAction(e.target.value)}
                       autoFocus
                     />
-                  </Form.Group>
+                  </Form.Group> */}
                 </Form>
               </Modal.Body>
 
@@ -421,92 +422,102 @@ const DeparturesAirlineEmp = () => {
                 <Button variant="secondary" onClick={handleClose}>
                   Close
                 </Button>
-                <button type="submit" variant="primary">
+                <button
+                  type="submit"
+                  variant="primary"
+                  className="btn btn-success"
+                >
                   Update
                 </button>
               </Modal.Footer>
             </form>
           </Modal>
         }
-
-        <Table responsive>
-          <thead>
-            Departures
-            <AddFlightData />
-            <tr style={{ backgroundColor: "#3bb19b7a" }}>
-              <th>ID</th>
-              <th>Airline</th>
-              <th>Departing to</th>
-              <th>Flight Type</th>
-              <th>Time</th>
-              <th>Terminal</th>
-              <th>Gate</th>
-              <th className="text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Flights.map((flight) => {
-              const formatted_id = flight._id.slice(-6).toUpperCase();
-              return !checkTime(TimeViseFlights, flight.time) ? (
-                <tr></tr>
-              ) : (
-                <tr>
-                  {/* <td>{i}</td> */}
-                  <td>{formatted_id}</td>
-                  <td>{flight.airline}</td>
-                  <td>{flight.arriving_from}</td>
-                  <td>{flight.flight_type}</td>
-                  <td>{flight.time}</td>
-                  <td>{flight.terminal}</td>
-                  <td>{flight.gate}</td>
-                  <td styles={styles}>
-                    <button
-                      name="edit"
-                      className="btn btn-warning"
-                      value={flight._id}
-                      onClick={(e) => {
-                        handleShow(e);
-                        handleUpdate(e);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      name="delete"
-                      className="btn btn-danger"
-                      id={flight._id}
-                      value={flight._id}
-                      onClick={(e) => {
-                        handleDeleteFlight(e);
-                        handleDeleteGate(e);
-                        refreshPage();
-                      }}
-                    >
-                      Delete
-                    </button>
-                    {flight.gate == "" ? (
+        <span
+          style={{ float: "right", marginRight: "15px", marginTop: "-20px" }}
+        >
+          <AddFlightData />
+        </span>
+        <div style={{ marginLeft: "20px", marginRight: "20px" }}>
+          <Table responsive bordered>
+            <thead>
+              {/* Departures */}
+              {/* <AddFlightData /> */}
+              <tr style={{ backgroundColor: "#3bb19b7a" }}>
+                <th>ID</th>
+                <th>Airline</th>
+                <th>Departing to</th>
+                <th>Flight Type</th>
+                <th>Time</th>
+                <th>Terminal</th>
+                <th>Gate</th>
+                <th className="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Flights.map((flight) => {
+                const formatted_id = flight._id.slice(-6).toUpperCase();
+                return !checkTime(TimeViseFlights, flight.time) ? (
+                  <tr></tr>
+                ) : (
+                  <tr>
+                    {/* <td>{i}</td> */}
+                    <td>{formatted_id}</td>
+                    <td>{flight.airline}</td>
+                    <td>{flight.arriving_from}</td>
+                    <td>{flight.flight_type}</td>
+                    <td>{flight.time}</td>
+                    <td>{flight.terminal}</td>
+                    <td>{flight.gate}</td>
+                    <td style={styles}>
                       <button
-                        name="assign"
-                        className="btn btn-info"
+                        name="edit"
+                        className="btn btn-warning"
+                        value={flight._id}
+                        onClick={(e) => {
+                          handleShow(e);
+                          handleUpdate(e);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        name="delete"
+                        className="btn btn-danger"
                         id={flight._id}
                         value={flight._id}
                         onClick={(e) => {
-                          assignGate(flight).then((res) => {
-                            refreshPage();
-                          });
+                          handleDeleteFlight(e);
+                          handleDeleteGate(e);
+                          refreshPage();
                         }}
                       >
-                        Assign Gate
+                        Delete
                       </button>
-                    ) : (
-                      <p></p>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+                      {flight.gate == "" ? (
+                        <button
+                          name="assign"
+                          className="btn btn-info"
+                          id={flight._id}
+                          value={flight._id}
+                          onClick={(e) => {
+                            assignGate(flight).then((res) => {
+                              refreshPage();
+                            });
+                          }}
+                        >
+                          Assign Gate
+                        </button>
+                      ) : (
+                        <p></p>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
       </div>
     );
   }
