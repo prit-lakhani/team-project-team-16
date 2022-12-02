@@ -22,3 +22,8 @@ class PlaneQueue {
     return intermediateChain
   }
 }
+
+const carouselQueue = new PlaneQueue()
+carouselQueue.enqueue({ name: '1' })
+carouselQueue.enqueue({ name: '2' })
+carouselQueue.enqueue({ name: '3' })
