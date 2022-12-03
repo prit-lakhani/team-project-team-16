@@ -5,31 +5,69 @@
 - Prit Lakhani
 - Vishwesh Shah
 
+## Summary of Contributions:
+
+- Designed the backend APIs for User Rewards and Admin Login.
+Implemented the frontned functionality to search for the hotels at the customer end.
+Implemented the backend functionality for viewing My Bookings at the customer end.
+Designed the backend APIs for Modify Booking and Cancel Booking at the customer end.
+Integrated frontend pages and tested API calls.
+Analyzed the primary goals to be met at every stage of our project in order to keep focused on what was necessary.
+Aniket Thumar
+
+- Designed frontend functionality for User Login.
+Created separate NavBar component to be used in all pages.
+Implemented the frontend functionality for viewing my bookings at the customer end.
+Ensured communication between teammates throughout the project and maintain sprint task sheet.
+Helped others to resolve their issues whenever required.
+Saurabh Sathe
+
+- Designed the backend APIs for Admin side to add rooms and view users, bookings and rooms.
+Implemented the backend functionality to add rewards on successful stay.
+Implemented the frontend functionality for viewing My Bookings at the customer end.
+Designed the frontend for Modify Booking and Cancel Booking at the customer end.
+Between sprints gave regular feedback, allowing us to bounce ideas off all our teammates and improve with each sprint.
+Harsh Vaghasiya
+
+- Designed Landing page with access to Login and Register.
+Designed the frontend for Admin side to add rooms and view users, bookings and rooms.
+Implemented the backend functionality to search for the hotels at the customer end.
+Designed the frontend for User Profile.
+Implemented routing on the frontend side.
+
+
+
 ## Github Project Board
 https://github.com/gopinathsjsu/team-project-team-16
 
 ## Project Journal
 Pravin's Journal
 
-## Technology Stack
-### Front End:
-- React JS
-### Back End:
-- Express
-- Node.js
+## Tools and Languages Used
+- Frontend : React JS, Html, CSS
+- Backend : Node JS, Express JS
+- Database : MongoDB
+- Cloud : AWS EC2 Autoscaling with Load Balancer
 
-### Database:
-- MongoDB
-
-### Unit Test Framework:
-- Mocha and Jmeter
 
 
 ## XP Values
-- Respect
-- Simplicity
-- Courage
-- Feedback
+1. Communication
+- WhatsApp was our primary means of communication. 
+- To keep track of our progress, everyone on our team collaborated at every level of the project. 
+- We held a weekly sprint on Thursdays to keep track of our progress up to that point. 
+- During weekly sprints, we attempted to identify our roadblocks and eradicate them in the following sprint. 
+- In holding meetings, our team used a hybrid communication method that included in-person meetings as well as online sessions through Zoom.
+2. Simplicity
+- We attempted to keep things simple and to "do only what is necessary." 
+- We also attempted to reduce time waste by completing only the absolute criteria listed in the problem statement.
+3. Feedback
+- At the end of each sprint, a few minutes were set aside for feedback to discuss whether any team members needed to improve. 
+- We found areas for improvement through frequent input and 
+
+4. Respect
+
+5. Courage
 
 ## Design Pattern
 
