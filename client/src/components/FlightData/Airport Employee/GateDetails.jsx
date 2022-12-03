@@ -5,6 +5,7 @@ import { Table, Button, Badge } from "react-bootstrap";
 import EnableDisableGate from "./DisableGate";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dynamicURL from "../../../Utils/urlConfig";
 
 import Main from "../../Main";
 
@@ -20,7 +21,7 @@ const GateDetails = () => {
   };
 
   useEffect(async (req, res) => {
-    const gates = await axios.get("http://localhost:8080/api/gates/getgates");
+    const gates = await axios.get(`${dynamicURL}/api/gates/getgates`);
     // console.log("Data:", gates.data);
     setGates(gates.data);
   }, []);
@@ -34,13 +35,6 @@ const GateDetails = () => {
     toast("Wow so easy!");
     // window.alert("Operation perfromed successfully");
   };
-  // const notify = () => toast("Wow so easy!");
-
-  // const gettingGates = async (req, res) => {
-  //   const gates = await axios.get("http://localhost:8080/api/gates/getgates");
-  //   // console.log("Data:", gates.data);
-  //   setGates(gates.data);
-  // };
 
   const enableGate = async (book, gate) => {
     console.log("Enable Gate ID : ", book._id, gate._id);
@@ -50,7 +44,7 @@ const GateDetails = () => {
     };
 
     try {
-      const url = "http://localhost:8080/api/gates/enable/gate/" + gate._id;
+      const url = `${dynamicURL}/api/gates/enable/gate/` + gate._id;
 
       const GateToBeEnable = await axios.post(url, {
         sendData,

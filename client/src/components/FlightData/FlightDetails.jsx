@@ -10,6 +10,7 @@ import AddFlightData from "./AddFlightDetails";
 import Arrivals from "./Arrivals";
 import Departures from "./Departures";
 import GeneralUsers from "./GeneralUsers/FlightsGeneralUsers";
+import dynamicURL from "../../Utils/urlConfig";
 const FlightDetailsTable = () => {
   const [Flights, setFlightDetails] = useState([]);
   const [search, setSearch] = useState("");
@@ -55,8 +56,7 @@ const FlightDetailsTable = () => {
     };
     console.log("Update data : ", obj);
     try {
-      const url =
-        "http://localhost:8080/api/flights/update/" + obj.UpdateAirline_ID;
+      const url = `${dynamicURL}/api/flights/update/` + obj.UpdateAirline_ID;
       const { data: res } = axios.post(url, obj);
       console.log("From handle Data :", res.message);
     } catch (error) {
@@ -73,7 +73,7 @@ const FlightDetailsTable = () => {
 
   const getFlightDetails = async (req, res) => {
     try {
-      const response = await axios.get("http://localhost:8080/api/flights");
+      const response = await axios.get(`${dynamicURL}/api/flights`);
       console.log("Getting data from flights api", response.data[0]);
       setFlightDetails(response.data);
       setFilteredFlights(response.data);
@@ -86,7 +86,7 @@ const FlightDetailsTable = () => {
     try {
       const IDToBeUpdated = e.target.value;
       console.log("IDToBeUpdated : ", IDToBeUpdated);
-      const url = "http://localhost:8080/api/flights/update/" + IDToBeUpdated;
+      const url = `${dynamicURL}/api/flights/update/` + IDToBeUpdated;
       const DataToBeUpdated = await axios.get(url);
       if (DataToBeUpdated) {
         console.log("Data to be updated", DataToBeUpdated.data.airline);
@@ -117,7 +117,7 @@ const FlightDetailsTable = () => {
     console.log("IDToBeDeleted : ", IDToBeDeleted);
     try {
       const response = await axios.delete(
-        "http://localhost:8080/api/flights?id=" + IDToBeDeleted
+        `${dynamicURL}/api/flights?id=` + IDToBeDeleted
       );
       if (response) {
         console.log("Success");

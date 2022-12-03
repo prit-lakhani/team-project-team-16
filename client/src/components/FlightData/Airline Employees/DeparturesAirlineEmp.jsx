@@ -7,6 +7,7 @@ import DateTimePicker from "react-datetime-picker";
 import moment from "moment";
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles.css";
+import dynamicURL from "../../../Utils/urlConfig";
 
 const DeparturesAirlineEmp = () => {
   const [Flights, setFlightDetails] = useState([]);
@@ -44,8 +45,7 @@ const DeparturesAirlineEmp = () => {
     };
     console.log("Update data : ", obj);
     try {
-      const url =
-        "http://localhost:8080/api/flights/update/" + obj.UpdateAirline_ID;
+      const url = `${dynamicURL}/api/flights/update/` + obj.UpdateAirline_ID;
       const { data: res } = axios.post(url, obj);
       console.log("From handle Data :", res.message);
     } catch (error) {
@@ -64,7 +64,7 @@ const DeparturesAirlineEmp = () => {
     try {
       const IDToBeUpdated = e.target.value;
       console.log("IDToBeUpdated : ", IDToBeUpdated);
-      const url = "http://localhost:8080/api/flights/update/" + IDToBeUpdated;
+      const url = `${dynamicURL}/api/flights/update/` + IDToBeUpdated;
       const DataToBeUpdated = await axios.get(url);
       if (DataToBeUpdated) {
         console.log("Data to be updated", DataToBeUpdated.data.airline);
@@ -90,12 +90,9 @@ const DeparturesAirlineEmp = () => {
 
   const getFlightDetails = async (req, res) => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/flights/departures"
-      );
+      const response = await axios.get(`${dynamicURL}/api/flights/departures`);
       console.log("Getting data from flights api", response.data[0]);
       setFlightDetails(response.data);
-      // setFilteredFlights(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -106,7 +103,7 @@ const DeparturesAirlineEmp = () => {
     console.log("IDToBeDeleted : ", IDToBeDeleted);
     try {
       const response = await axios.delete(
-        "http://localhost:8080/api/flights?id=" + IDToBeDeleted
+        `${dynamicURL}/api/flights?id=` + IDToBeDeleted
       );
       if (response) {
         console.log("Success");
@@ -125,7 +122,7 @@ const DeparturesAirlineEmp = () => {
     console.log("GateIDToBeDeleted :", FlightIDToBeDeleted);
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/flights/getgates/" + FlightIDToBeDeleted
+        `${dynamicURL}/api/flights/getgates/` + FlightIDToBeDeleted
       );
       if (response) {
         console.log("Gate details : ", response.data);
@@ -165,43 +162,15 @@ const DeparturesAirlineEmp = () => {
     }
   };
 
-  // const assignGate = async (flightT) => {
-  //     console.log("assignGate function ....");
-  //     const gateObj = {
-  //         terminal: flightT.terminal,
-  //         flight_type: flightT.flight_type,
-  //         time: flightT.time,
-  //         airline: flightT.airline,
-  //         flight_id: flightT._id.slice(-6).toUpperCase(),
-  //     };
-  //     console.log(gateObj);
-
-  //     try {
-  //         const url = "http://localhost:8080/api/gates/random/assign";
-  //         const { data: res } = await axios.post(url, gateObj);
-  //         console.log(res);
-
-  //         const url2 = "http://localhost:8080/api/flights/update/gate/" + flightT._id;
-  //         const { data: res2 } = await axios.post(url2, {
-  //             gate: res.gateNum,
-  //         });
-
-  //         console.log(res2);
-  //     } catch (error) {
-  //         console.log(error);
-  //     }
-  // }
-
   const assignGate = async (flightT) => {
-    // moment(UpdateTime).format("lll")
     var start_time = moment(flightT.time);
     var end_time = start_time;
 
     end_time = moment(start_time).add(1, "hours");
-    // moment(end_time).format("lll")
+
     const start = moment(start_time).format("lll");
     const end = moment(end_time).format("lll");
-    // end_time.add(1, "h");
+
     console.log("assignGate function ....");
     const gateObj = {
       terminal: flightT.terminal,
@@ -215,7 +184,7 @@ const DeparturesAirlineEmp = () => {
     console.log("Flight ID to be updated(Gate number) : ", flightT._id);
 
     try {
-      const url = "http://localhost:8080/api/gates/random/assign";
+      const url = `${dynamicURL}/api/gates/random/assign`;
       await axios.post(url, gateObj);
       console.log("hello");
     } catch (error) {
@@ -328,93 +297,43 @@ const DeparturesAirlineEmp = () => {
                       </span>
                     </span>
                   </Form.Group>
-                  <label>Time</label>
-                  <br />
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    {/* <Form.Control
-                                            name="time"
-                                            value={UpdateTime}
-                                            className="mb-3"
-                                            controlId="exampleForm.ControlInput1"
-                                            type="string"
-                                            autoFocus
-                                            onChange={(e) => setUpdateTime(e.target.value)}
-                                        /> */}
-                    <DateTimePicker
-                      className="mb-3"
-                      onChange={setUpdateTime}
-                      value={UpdateTime}
-                    />
-                  </Form.Group>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Terminal</Form.Label>
+                  <span style={{ display: "flex" }}>
+                    <label>Time : </label>
 
-                    <select
-                      name="terminal"
+                    <Form.Group
                       className="mb-3"
                       controlId="exampleForm.ControlInput1"
-                      onChange={(e) => setUpdateTerminal(e.target.value)}
-                      value={UpdateTerminal}
                     >
-                      <option>Select Terminal</option>
-                      {<option label="T1" value="T1"></option>}
-                      {<option label="T2" value="T2"></option>}
-                      {<option label="T3" value="T3"></option>}
-                    </select>
+                      <span style={{ marginLeft: "10px" }}>
+                        <DateTimePicker
+                          className="mb-3"
+                          onChange={setUpdateTime}
+                          value={UpdateTime}
+                        />
+                      </span>
+                    </Form.Group>
+                  </span>
 
-                    {/* <p>Terminal : {data.Terminal}</p> */}
-                  </Form.Group>
-                  {/* <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Gate</Form.Label>
-                    <Form.Control
-                      name="gate"
-                      value={UpdateGate}
-                      className="mb-3"
-                      controlId="exampleForm.ControlInput1"
-                      type="string"
-                      onChange={(e) => setUpdateGate(e.target.value)}
-                      autoFocus
-                    />
-                  </Form.Group> */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
-                    <Form.Label>Baggae Claim</Form.Label>
-                    <Form.Control
-                      name="bag_claim"
-                      value={UpdateBagClaim}
-                      className="mb-3"
-                      controlId="exampleForm.ControlInput1"
-                      type="string"
-                      onChange={(e) => setUpdateBagClaim(e.target.value)}
-                      autoFocus
-                    />
+                    <Form.Label>Terminal : </Form.Label>
+                    <span style={{ marginLeft: "10px" }}>
+                      <select
+                        name="terminal"
+                        className="mb-3"
+                        controlId="exampleForm.ControlInput1"
+                        onChange={(e) => setUpdateTerminal(e.target.value)}
+                        value={UpdateTerminal}
+                      >
+                        <option>Select Terminal</option>
+                        {<option label="T1" value="T1"></option>}
+                        {<option label="T2" value="T2"></option>}
+                        {<option label="T3" value="T3"></option>}
+                      </select>
+                    </span>
                   </Form.Group>
-                  {/* <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Action</Form.Label>
-                    <Form.Control
-                      className="mb-3"
-                      name="action"
-                      value={UpdateAction}
-                      controlId="exampleForm.ControlInput1"
-                      type="email"
-                      onChange={(e) => setUpdateAction(e.target.value)}
-                      autoFocus
-                    />
-                  </Form.Group> */}
                 </Form>
               </Modal.Body>
 
@@ -439,10 +358,8 @@ const DeparturesAirlineEmp = () => {
           <AddFlightData />
         </span>
         <div style={{ marginLeft: "20px", marginRight: "20px" }}>
-          <Table responsive bordered>
+          <Table responsive bordered striped>
             <thead>
-              {/* Departures */}
-              {/* <AddFlightData /> */}
               <tr style={{ backgroundColor: "#3bb19b7a" }}>
                 <th>ID</th>
                 <th>Airline</th>
@@ -461,7 +378,6 @@ const DeparturesAirlineEmp = () => {
                   <tr></tr>
                 ) : (
                   <tr>
-                    {/* <td>{i}</td> */}
                     <td>{formatted_id}</td>
                     <td>{flight.airline}</td>
                     <td>{flight.arriving_from}</td>

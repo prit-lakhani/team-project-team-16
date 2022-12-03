@@ -65,7 +65,7 @@ const Main = () => {
       <nav className={styles.navbar}>
         <span>
           <h4 style={{ marginTop: "15px" }}>
-            Welcome back,
+            Welcome,
             <span className="badge badge-light">{user.firstName}</span>
           </h4>
           <p>({user.role})</p>

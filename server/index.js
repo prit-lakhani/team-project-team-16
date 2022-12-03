@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth");
 const flightsRoutes = require("./routes/flights");
 const gateRoutes = require("./routes/gates");
 const baggageRoutes = require("./routes/baggage");
+const balancerRoutes = require("./routes/balancer");
 
 // database connection
 connection();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 // routes
+app.use("/api", balancerRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/flights", flightsRoutes);

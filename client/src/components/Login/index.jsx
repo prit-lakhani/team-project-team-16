@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import dynamicURL from "../../Utils/urlConfig";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,18 +19,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/auth";
+      const url = `${dynamicURL}/api/auth`;
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("user", JSON.stringify(res));
       //   console.log("User details :", JSON.stringify(res));
       //   const userDetail = localStorage.getItem("user");
       var path = "/";
       if (res.role === "User") {
-        path += "user"
+        path += "user";
       } else if (res.role === "Airline Employee") {
-        path += "employee"
+        path += "employee";
       } else if (res.role === "Airport Employee") {
-        path += "airportemp"
+        path += "airportemp";
       }
       path += "/arrivals";
       navigate(path);

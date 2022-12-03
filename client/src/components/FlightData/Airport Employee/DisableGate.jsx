@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 import DateTimePicker from "react-datetime-picker";
 import moment from "moment";
-import { Alert } from "bootstrap";
+import dynamicURL from "../../../Utils/urlConfig";
 
 const EnableDisableGate = () => {
   const [flightType, setFlightType] = useState("");
@@ -16,7 +16,6 @@ const EnableDisableGate = () => {
   const [startTime, setstartTime] = useState(new Date());
   const [endTime, setendTime] = useState(new Date());
 
-  const [terminal, setTerminal] = useState("");
   const [gate, setGate] = useState("");
   const [bag_claim, setBag_claim] = useState("");
   const [action, setAction] = useState("");
@@ -148,12 +147,8 @@ const EnableDisableGate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("GateNUMBER : ", selectedGate);
-    // console.log("Time from :", startTime);
-    // console.log("Time from :", endTime);
 
     const disableGate = async (flightT) => {
-      // console.log("disable function ....");
       const gateObj = {
         startTime: moment(startTime).format("lll"),
         endTime: moment(endTime).format("lll"),
@@ -161,7 +156,7 @@ const EnableDisableGate = () => {
       };
 
       try {
-        const url = "http://localhost:8080/api/gates/disable/gate";
+        const url = `${dynamicURL}/api/gates/disable/gate`;
         await axios.post(url, gateObj);
       } catch (error) {
         window.alert("Error", error);

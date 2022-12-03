@@ -2,43 +2,29 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
-import Arrivals from "../Arrivals";
-import Departures from "../Departures";
-// import DeparturesGeneralUsers from "./DeparturesGeneralUsers";
 import moment from "moment";
-import DateTimePicker from "react-datetime-picker";
-import GateDetails from "./GateDetails";
 import { useNavigate } from "react-router-dom";
+import dynamicURL from "../../../Utils/urlConfig";
 
 const ArrivalsAirportEmp = () => {
   const [Flights, setFlightDetails] = useState([]);
-  const [getArrivals, setGetArrivals] = useState("");
-  const [filteredFlights, setFilteredFlights] = useState([]);
   const [TimeViseFlights, setTimeViseFlights] = useState("0");
-
   const navigate = useNavigate();
-
-  const handleArrivals = () => {
-    console.log("from handleArrivals");
-  };
-
-  const handleDepartures = () => {
-    console.log("from handleDepartures");
-  };
 
   const refreshPage = () => {
     window.location.reload();
-    window.location.href = "/airportemp/arrivals";
+    // window.location.href = "/airportemp/arrivals";
   };
 
   const handleAssignCarousel = async (flight) => {
     const flightObj = flight;
-    // console.log("FLIGHT OBJECT : ", flight);
+
     try {
-      const url = "http://localhost:8080/api/baggages/assign/carousel";
+      const url = `${dynamicURL}/api/baggages/assign/carousel`;
       const carousel = await axios.post(url, flightObj);
       console.log("carousel", carousel);
-      window.location.reload();
+      getFlightDetails();
+      // window.location.reload();
     } catch (error) {
       window.alert(error);
     }
@@ -46,9 +32,7 @@ const ArrivalsAirportEmp = () => {
 
   const getFlightDetails = async (req, res) => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/flights/arrivals"
-      );
+      const response = await axios.get(`${dynamicURL}/api/flights/arrivals`);
       console.log("Getting data from flights api", response.data[0]);
       setFlightDetails(response.data);
     } catch (error) {
@@ -89,10 +73,6 @@ const ArrivalsAirportEmp = () => {
     }
   };
 
-  const gateDetails = () => {
-    console.log("Hello world");
-  };
-
   return (
     <div>
       <select
@@ -118,56 +98,56 @@ const ArrivalsAirportEmp = () => {
       </button>
 
       {
-        <Table responsive bordered>
-          <thead>
-            {/* Arrivals Airport Employee */}
-            <tr style={{ backgroundColor: "#3bb19b7a" }}>
-              <th>ID</th>
-              <th>Airline</th>
-              <th>Arriving From</th>
-              <th>Flight Type</th>
-              <th>time</th>
-              <th>Terminal</th>
-              <th>Gate</th>
-              <th>Baggage Claim</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Flights.map((flight) => {
-              const formatted_id = flight._id.slice(-6).toUpperCase();
-              return !checkTime(TimeViseFlights, flight.time) ? (
-                <tr></tr>
-              ) : (
-                <tr>
-                  {/* <td>{i}</td> */}
-                  <td>{formatted_id}</td>
-                  <td>{flight.airline}</td>
-                  <td>{flight.arriving_from}</td>
-                  <td>{flight.flight_type}</td>
-                  <td>{flight.time}</td>
-                  <td>{flight.terminal}</td>
-                  <td>{flight.gate}</td>
-                  <td>
-                    {flight.bag_claim === "" ? (
-                      <button
-                        className="btn btn-warning"
-                        onClick={() => {
-                          handleAssignCarousel(flight);
-                          refreshPage();
-                        }}
-                        // onChange={refreshPage}
-                      >
-                        Assign
-                      </button>
-                    ) : (
-                      flight.bag_claim
-                    )}
-                  </td>
+        <>
+          <div style={{ marginLeft: "20px", marginRight: "20px" }}>
+            <Table responsive bordered striped>
+              <thead>
+                <tr style={{ backgroundColor: "#3bb19b7a" }}>
+                  <th>ID</th>
+                  <th>Airline</th>
+                  <th>Arriving From</th>
+                  <th>Flight Type</th>
+                  <th>time</th>
+                  <th>Terminal</th>
+                  <th>Gate</th>
+                  <th>Baggage Claim</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+              </thead>
+              <tbody>
+                {Flights.map((flight) => {
+                  const formatted_id = flight._id.slice(-6).toUpperCase();
+                  return !checkTime(TimeViseFlights, flight.time) ? (
+                    <tr></tr>
+                  ) : (
+                    <tr>
+                      <td>{formatted_id}</td>
+                      <td>{flight.airline}</td>
+                      <td>{flight.arriving_from}</td>
+                      <td>{flight.flight_type}</td>
+                      <td>{flight.time}</td>
+                      <td>{flight.terminal}</td>
+                      <td>{flight.gate}</td>
+                      <td>
+                        {flight.bag_claim === "" ? (
+                          <button
+                            className="btn btn-warning"
+                            onClick={() => {
+                              handleAssignCarousel(flight);
+                            }}
+                          >
+                            Assign
+                          </button>
+                        ) : (
+                          flight.bag_claim
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
+        </>
       }
     </div>
   );

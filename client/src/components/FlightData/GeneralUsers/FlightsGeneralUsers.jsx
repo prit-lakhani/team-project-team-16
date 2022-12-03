@@ -10,6 +10,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import AddFlightData from "../AddFlightDetails";
 import Arrivals from "../Arrivals";
 import Departures from "../Departures";
+import dynamicURL from "../../../Utils/urlConfig";
 
 const GeneralUsers = () => {
   const [Flights, setFlightDetails] = useState([]);
@@ -25,7 +26,7 @@ const GeneralUsers = () => {
 
   const getFlightDetails = async (req, res) => {
     try {
-      const response = await axios.get("http://localhost:8080/api/flights");
+      const response = await axios.get(`${dynamicURL}/api/flights`);
       console.log("Getting data from flights api", response.data[0]);
       setFlightDetails(response.data);
       setFilteredFlights(response.data);

@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+import dynamicURL from "../../../Utils/urlConfig";
 const DeparturesGeneralUsers = () => {
   const [Flights, setFlightDetails] = useState([]);
   const [getArrivals, setGetArrivals] = useState("");
@@ -19,9 +20,7 @@ const DeparturesGeneralUsers = () => {
 
   const getFlightDetails = async (req, res) => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/flights/departures"
-      );
+      const response = await axios.get(`${dynamicURL}/api/flights/departures`);
       console.log("Getting data from flights api", response.data[0]);
       setFlightDetails(response.data);
       // setFilteredFlights(response.data);

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Table, Button, Form, Modal } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import AddFlightData from "./AddFlightDetails";
+import dynamicURL from "../../Utils/urlConfig";
 
 const Arrivals = () => {
   const [Flights, setFlightDetails] = useState([]);
@@ -37,8 +38,7 @@ const Arrivals = () => {
     };
     console.log("Update data : ", obj);
     try {
-      const url =
-        "http://localhost:8080/api/flights/update/" + obj.UpdateAirline_ID;
+      const url = `${dynamicURL}/api/flights/update/` + obj.UpdateAirline_ID;
       const { data: res } = axios.post(url, obj);
       console.log("From handle Data :", res.message);
     } catch (error) {
@@ -57,7 +57,7 @@ const Arrivals = () => {
     try {
       const IDToBeUpdated = e.target.value;
       console.log("IDToBeUpdated : ", IDToBeUpdated);
-      const url = "http://localhost:8080/api/flights/update/" + IDToBeUpdated;
+      const url = `${dynamicURL}/api/flights/update/` + IDToBeUpdated;
       const DataToBeUpdated = await axios.get(url);
       if (DataToBeUpdated) {
         console.log("Data to be updated", DataToBeUpdated.data.airline);
@@ -83,9 +83,7 @@ const Arrivals = () => {
 
   const getFlightDetails = async (req, res) => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/flights/arrivals"
-      );
+      const response = await axios.get(`${dynamicURL}/api/flights/arrivals`);
       console.log("Getting data from flights api", response.data[0]);
       setFlightDetails(response.data);
       // setFilteredFlights(response.data);
@@ -99,7 +97,7 @@ const Arrivals = () => {
     console.log("IDToBeDeleted : ", IDToBeDeleted);
     try {
       const response = await axios.delete(
-        "http://localhost:8080/api/flights?id=" + IDToBeDeleted
+        `${dynamicURL}/api/flights?id=` + IDToBeDeleted
       );
       if (response) {
         console.log("Success");

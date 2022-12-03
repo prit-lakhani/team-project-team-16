@@ -4,29 +4,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import dynamicURL from "../../../Utils/urlConfig";
 
 const DeparturesAirportEmp = () => {
   const [Flights, setFlightDetails] = useState([]);
-  const [getArrivals, setGetArrivals] = useState("");
-  const [filteredFlights, setFilteredFlights] = useState([]);
   const [TimeViseFlights, setTimeViseFlights] = useState("0");
-
-  const handleArrivals = () => {
-    console.log("from handleArrivals");
-  };
-
-  const handleDepartures = () => {
-    console.log("from handleDepartures");
-  };
 
   const getFlightDetails = async (req, res) => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/flights/departures"
-      );
+      const response = await axios.get(`${dynamicURL}/api/flights/departures`);
       console.log("Getting data from flights api", response.data[0]);
       setFlightDetails(response.data);
-      // setFilteredFlights(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -89,40 +77,41 @@ const DeparturesAirportEmp = () => {
         Gate details
       </button>
       {
-        <Table responsive bordered>
-          <thead>
-            {/* Departures Airport Employee */}
-            <tr style={{ backgroundColor: "#3bb19b7a" }}>
-              <th>ID</th>
-              <th>Airline</th>
-              <th>Departing to</th>
-              <th>Flight Type</th>
-              <th>time</th>
-              <th>Terminal</th>
-              <th>Gate</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Flights.map((flight) => {
-              const formatted_id = flight._id.slice(-6).toUpperCase();
-              return !checkTime(TimeViseFlights, flight.time) ? (
-                <tr></tr>
-              ) : (
-                <tr>
-                  {/* <td>{i}</td> */}
-                  <td>{formatted_id}</td>
-                  <td>{flight.airline}</td>
-                  <td>{flight.arriving_from}</td>
-                  <td>{flight.flight_type}</td>
-                  <td>{flight.time}</td>
-                  <td>{flight.terminal}</td>
-                  <td>{flight.gate}</td>
-                  {/* <td>{flight.bag_claim}</td> */}
+        <>
+          <div style={{ marginLeft: "20px", marginRight: "20px" }}>
+            <Table responsive bordered striped>
+              <thead>
+                <tr style={{ backgroundColor: "#3bb19b7a" }}>
+                  <th>ID</th>
+                  <th>Airline</th>
+                  <th>Departing to</th>
+                  <th>Flight Type</th>
+                  <th>time</th>
+                  <th>Terminal</th>
+                  <th>Gate</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+              </thead>
+              <tbody>
+                {Flights.map((flight) => {
+                  const formatted_id = flight._id.slice(-6).toUpperCase();
+                  return !checkTime(TimeViseFlights, flight.time) ? (
+                    <tr></tr>
+                  ) : (
+                    <tr>
+                      <td>{formatted_id}</td>
+                      <td>{flight.airline}</td>
+                      <td>{flight.arriving_from}</td>
+                      <td>{flight.flight_type}</td>
+                      <td>{flight.time}</td>
+                      <td>{flight.terminal}</td>
+                      <td>{flight.gate}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
+        </>
       }
     </div>
   );
