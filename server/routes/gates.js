@@ -358,4 +358,9 @@ router.post("/allgates", async (req, res) => {
     res.send(error);
   }
 });
+
+// router.post("/baggages", async (req, res) => {
+//   console.log("Hittinh baggage from baggages");
+// });
+
 module.exports = router;

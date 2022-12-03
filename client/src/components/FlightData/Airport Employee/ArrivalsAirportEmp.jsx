@@ -26,6 +26,24 @@ const ArrivalsAirportEmp = () => {
     console.log("from handleDepartures");
   };
 
+  const refreshPage = () => {
+    window.location.reload();
+    window.location.href = "/airportemp/arrivals";
+  };
+
+  const handleAssignCarousel = async (flight) => {
+    const flightObj = flight;
+    // console.log("FLIGHT OBJECT : ", flight);
+    try {
+      const url = "http://localhost:8080/api/baggages/assign/carousel";
+      const carousel = await axios.post(url, flightObj);
+      console.log("carousel", carousel);
+      window.location.reload();
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+
   const getFlightDetails = async (req, res) => {
     try {
       const response = await axios.get(
@@ -129,7 +147,22 @@ const ArrivalsAirportEmp = () => {
                   <td>{flight.time}</td>
                   <td>{flight.terminal}</td>
                   <td>{flight.gate}</td>
-                  <td>{flight.bag_claim}</td>
+                  <td>
+                    {flight.bag_claim === "" ? (
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => {
+                          handleAssignCarousel(flight);
+                          refreshPage();
+                        }}
+                        // onChange={refreshPage}
+                      >
+                        Assign
+                      </button>
+                    ) : (
+                      flight.bag_claim
+                    )}
+                  </td>
                 </tr>
               );
             })}

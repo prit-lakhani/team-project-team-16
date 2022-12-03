@@ -194,15 +194,30 @@ function AddFlightData() {
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label>Baggae Claim</Form.Label>
-                <Form.Control
-                  name="bag_claim"
-                  value={bag_claim}
+                {/* <select
+                  name="claim"
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
-                  type="string"
                   onChange={(e) => setBag_claim(e.target.value)}
-                  autoFocus
-                />
+                  value={bag_claim}
+                > */}
+                {/* <option> Select Terminal</option>
+                  <option label="C1" value="C1"></option>
+                  <option label="C2" value="C2"></option>
+                  <option label="C3" value="C3"></option>
+                  <option label="C4" value="C4"></option>
+                  <option label="C5" value="C5"></option>
+                  <option label="C6" value="C6"></option>
+                  <option label="C7" value="C7"></option>
+                  <option label="C8" value="C8"></option>
+                  <option label="C9" value="C9"></option>
+                  <option label="C10" value="C10"></option>
+                  <option label="C11" value="C11"></option>
+                  <option label="C12" value="C12"></option>
+                  <option label="C13" value="C13"></option>
+                  <option label="C14" value="C14"></option>
+                  <option label="C15" value="C15"></option>
+                </select> */}
               </Form.Group>
               {/* <Form.Group
                 className="mb-3"

@@ -7,6 +7,7 @@ const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const flightsRoutes = require("./routes/flights");
 const gateRoutes = require("./routes/gates");
+const baggageRoutes = require("./routes/baggage");
 
 // database connection
 connection();
@@ -20,6 +21,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/flights", flightsRoutes);
 app.use("/api/gates", gateRoutes);
+app.use("/api/baggages", baggageRoutes);
 
 const port = process.env.PORT || 8080;
 app.listen(port, console.log(`Listening on port ${port}...`));
