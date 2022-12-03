@@ -7,7 +7,7 @@ import Departures from "../Departures";
 import DeparturesGeneralUsers from "./DeparturesGeneralUsers";
 import moment from "moment";
 import DateTimePicker from "react-datetime-picker";
-import "/Users/spartan/Desktop/202-new/team-project-team-16/client/src/components/Main/custom.css";
+import "../../../components/Main/custom.css";
 import dynamicURL from "../../../Utils/urlConfig";
 
 const ArrivalsGeneralUsers = () => {
