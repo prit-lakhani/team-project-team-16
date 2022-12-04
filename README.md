@@ -82,12 +82,16 @@ https://github.com/gopinathsjsu/team-project-team-16
 ![WireFrame](https://user-images.githubusercontent.com/99626312/205468790-a872d9c3-e76b-40ce-b00b-7dbcd3b23990.png)
 
 ### Link to team's GitHub Repo
+https://github.com/gopinathsjsu/team-project-team-16.git
 
 ### Link to team's Project Board
+https://github.com/gopinathsjsu/team-project-team-16/projects?query=is%3Aopen
 
 ### Link to team's Project Journal
+https://github.com/gopinathsjsu/team-project-team-16/tree/main/Documentation/Journals
 
 ### Link to team's Google Sprint Task Sheet
+https://docs.google.com/spreadsheets/d/1QBUD3UliFP4POEnYaCWp6dhYJzGkTVYBfCzc2Dva8SA/edit?usp=sharing
 
 ### Week Wise Design Decisions
 
