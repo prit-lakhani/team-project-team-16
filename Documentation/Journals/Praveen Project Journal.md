@@ -7,6 +7,7 @@ Sprint 1: 10/02/2022 - 10/08/2022
     3. Helped in creating Architecture diagram.
   - What am I planning to work on next?
     1. Learning React JS.
+    2. Learning Node JS.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
@@ -21,7 +22,7 @@ Sprint 2: 10/09/2022 - 10/15/2022
     3. Helped in designing Landing page.
   - What am I planning to work on next?
     1. Get comfortable with creating APIs with React and Express.
-    2. An API to add flight.
+    2. An API for login and signup.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
@@ -31,9 +32,9 @@ Sprint 3: 10/16/2022 - 10/22/2022
 
 - Weekly Scrum Report
   - What tasks did I work on / complete?
-    1. Develop an API to add flight.
+    1. Develop an API to signup and login.
   - What am I planning to work on next?
-    1. Develop an API to fecth all the added flights and display it to all the users.
+    1. Redirect the user to a specific page based on the user role.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
@@ -43,10 +44,10 @@ Sprint 4: 10/23/2022 - 10/29/2022
 
 - Weekly Scrum Report
   - What tasks did I work on / complete?
-    1. Designed flight list table based on the flight type (Arrivals and Departures).
-    2. Modified add flight API.
+    1. Designed API to redirect the user based on their role (General User, Airline Employee, Airport Employee).
+    2. Modified API routes and update the URLs.
   - What am I planning to work on next?
-  1. Develop an APIs to delete and update the time.
+  1. Develop an APIs for assign baggage carousel for each arriving flight.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
@@ -56,10 +57,9 @@ Sprint 5: 10/30/2022 - 11/05/2022
 
 - Weekly Scrum Report
   - What tasks did I work on / complete?
-    1. Developed an APIs to delete and upadate the flight.
-    2. Developed API to fetch flight based on the times (Next 1 hour, 2 hour and 4 hour).
+    1. Developed an APIs to assign the baggage carousel number to each arriving flight.
   - What am I planning to work on next?
-    1. To display filghts based on flight type (Arrivals, and departures).
+    1. Make an API to update the flight details after assigning the baggage carosuel number to each arriving flight.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
@@ -69,10 +69,9 @@ Sprint 6: 11/06/2022 - 11/12/2022
 
 - Weekly Scrum Report
   - What tasks did I work on / complete?
-    1. Completed add flight functionality and display flights based on user needs.
+    1. Implemented assigning baggage carousel functionality and updated flights.
   - What am I planning to work on next?
-    1. Develope an API to assign random gate to each flights.
-    2. Gate Assignments and updated the flight details with assigned gate number.
+    1. Integrate the baggage carousel API with frontend.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
@@ -82,9 +81,8 @@ Sprint 7: 11/13/2022 - 11/19/2022
 
 - Weekly Scrum Report
   - What tasks did I work on / complete?
-    1. Implemented Random Gate Assignemtn API manually from server side.
-    2. Integrated Gate Assignemt API with frontend.
-    3. Display flight details with assign gate number.
+    1. Integrated Baggage Carousel API with frontend.
+    2. Display flight details with assign baggage carosuel number.
   - What am I planning to work on next?
     1. Testing the application with end to end testing.
     2. Deployment of application on AWS with Load Balancer.
