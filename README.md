@@ -73,7 +73,6 @@ https://github.com/gopinathsjsu/team-project-team-16
 
 ![image](https://user-images.githubusercontent.com/75003630/205477251-8d8c06dc-ed6f-44a0-abd5-0ffd8a932371.png)
 
-
 ## Deployment Diagram
 
 ![DeploymentDiagram](https://user-images.githubusercontent.com/99626312/205467579-d628acbb-ee1f-4f75-9018-ce730047d11c.jpeg)
@@ -83,15 +82,19 @@ https://github.com/gopinathsjsu/team-project-team-16
 ![WireFrame](https://user-images.githubusercontent.com/99626312/205468790-a872d9c3-e76b-40ce-b00b-7dbcd3b23990.png)
 
 ### Link to team's GitHub Repo
+
 https://github.com/gopinathsjsu/team-project-team-16.git
 
 ### Link to team's Project Board
+
 https://github.com/gopinathsjsu/team-project-team-16/projects?query=is%3Aopen
 
 ### Link to team's Project Journal
+
 https://github.com/gopinathsjsu/team-project-team-16/tree/main/Documentation/Journals
 
 ### Link to team's Google Sprint Task Sheet
+
 https://docs.google.com/spreadsheets/d/1QBUD3UliFP4POEnYaCWp6dhYJzGkTVYBfCzc2Dva8SA/edit?usp=sharing
 
 ### Week Wise Design Decisions
@@ -110,7 +113,7 @@ https://docs.google.com/spreadsheets/d/1QBUD3UliFP4POEnYaCWp6dhYJzGkTVYBfCzc2Dva
 
 1. 3 personas: Airlines Employee, Airport Employee, General Users to access the system with role based authentication.
 2. All Users :
-   - Retrieve flights (for next 1 hour, 2 hour and 4 hour) arrivals and departures with updated details including .
+   - Retrieve flights (for next 1 hour, 2 hour and 4 hour) arrivals and departures including updated gate details, baggage carousel number for arriving file.
 3. Airline Employee :
    - Add, update and delete flights belonging to their airline relevant to that airport.
    - A random gate assignment for arriving and departure flights - designed to prevent conflict assignments.
