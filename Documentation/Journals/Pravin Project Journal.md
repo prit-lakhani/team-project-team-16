@@ -8,6 +8,7 @@ Sprint 1: 10/02/2022 - 10/08/2022
   - What am I planning to work on next?
     1. Learning React JS.
     2. Learning Node JS.
+    3. Mongo DB learning.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
