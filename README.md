@@ -91,23 +91,24 @@ https://github.com/gopinathsjsu/team-project-team-16
 
 ### Week Wise Design Decisions
 
-1. Technologies to be used for frontend - Vannilla HTML, CSS, Bootstrap, React JS, Ant Design or Material UI?
+1. Technologies to be used for frontend - Vannilla HTML, CSS, Bootstrap, React JS, React-bootstrap or Material UI?
 2. Technologies to use for the backend - Python Flask, Java Spring Boot or Node JS?
 3. Database to be used - MySQL or MongoDB
 4. Design patterns to use - Decided to use Chain of Responsibility and Strategy Patterns
-5. Rewards generation strategies- factors affecting rewards, when they change, events triggering them and much more.
-6. Dynamic Pricing Strategies - How weekday, weekends, national holidays and festive seasons will contribute to the booking price of day?
-7. Testing Strategies - Tools to be used and which APIs to test?
-8. Cloud Services strategies- AWS or Heroku, ECR or EC2 deployment and cloud related decisions?
+5. Random Gate Assignment strategies- Decided how to check time conflicts for each gate before assigning .
+6. Baggage Carousel Assignment strategy - At what time baggage carosuel number should be assigned and for how long?
+7. Enable/Disable Gate for maintenance : Till how long gate can be put under maintanence and can one gate be disable for different times.
+8. Testing Strategies - Tools to be used and which APIs to test?
+9. Cloud Services strategies- AWS or Heroku, ECR or EC2 deployment and cloud related decisions?
 
 ### Feature set
 
 1. 3 personas: Airlines Employee, Airport Employee, General Users to access the system with role based authentication.
 2. All Users :
-   - Retrieve flights (for next 1 hour, 2 hour and 4 hour) arrivals and departures with updated details.
+   - Retrieve flights (for next 1 hour, 2 hour and 4 hour) arrivals and departures with updated details including .
 3. Airline Employee :
    - Add, update and delete flights belonging to their airline relevant to that airport.
    - A random gate assignment for arriving and departure flights - designed to prevent conflict assignments.
 4. Airport Employees:
-   - Enable or disable one or more gates for maintenance.
+   - Enable or disable one or more gates for maintenance and can see each gate details including gate status etc.
    - Assign baggage carousel number to arriving flights - the system should prevent conflicting assignments.
