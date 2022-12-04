@@ -71,7 +71,8 @@ https://github.com/gopinathsjsu/team-project-team-16
 
 ## Class Diagram
 
-![Class Diagram]()
+![image](https://user-images.githubusercontent.com/75003630/205477251-8d8c06dc-ed6f-44a0-abd5-0ffd8a932371.png)
+
 
 ## Deployment Diagram
 
