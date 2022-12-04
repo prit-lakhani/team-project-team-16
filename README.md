@@ -88,7 +88,7 @@ https://github.com/gopinathsjsu/team-project-team-16
 ### Link to team's Project Journal
 
 ### Link to team's Google Sprint Task Sheet
-[202 Team 16 Sprint-Sheet.xlsx](https://github.com/gopinathsjsu/team-project-team-16/files/10147902/202.Team.16.Sprint-Sheet.xlsx)
+https://docs.google.com/spreadsheets/d/1QBUD3UliFP4POEnYaCWp6dhYJzGkTVYBfCzc2Dva8SA/edit?usp=sharing
 
 ### Week Wise Design Decisions
 
