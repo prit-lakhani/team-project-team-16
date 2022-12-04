@@ -42,7 +42,7 @@ Sprint 4: 10/23/2022 - 10/29/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		1. Updated gate API to Display all the gate details only to an Airport employee.
-    2. Modified Registration and Login page.
+    		2. Modified Registration and Login page.
 	- What am I planning to work on next?
         1. Research on how to implement the Enable or disable one or more gates for maintenance functionality.
         2. learn how to use moment.js library for date and time comparisons.	 
