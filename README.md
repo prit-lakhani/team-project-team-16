@@ -89,7 +89,8 @@ Pravin's Journal
 
 ## UI Wireframe
 
-![WireFrame](https://user-images.githubusercontent.com/99626312/205468166-8ab4cb40-932a-4b6e-ad8b-a2444e856be4.png)
+![WireFrame](https://user-images.githubusercontent.com/99626312/205468790-a872d9c3-e76b-40ce-b00b-7dbcd3b23990.png)
+
 
 
 ## Scrum
