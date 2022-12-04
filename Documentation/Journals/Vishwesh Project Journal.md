@@ -82,7 +82,7 @@ Sprint 6: 11/06/2022 - 11/12/2022
 Sprint 7: 11/13/2022 - 11/19/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
-		1. Implemented the disable one or more gates for maintenance functionality in airport employee panel.
+		1. Implemented the Enable one or more gates for maintenance functionality in airport employee panel.
 		2. Merge Enable/Disable gate API with frontend. 	
 	- What am I planning to work on next?
 		1. Testing the application with end to end testing.
