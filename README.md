@@ -6,40 +6,37 @@
 - Prit Lakhani
 - Vishwesh Shah
 
-## Summary of Contributions:
+### Summary of Contributions
 
-- Designed the backend APIs for User Rewards and Admin Login.
-  Implemented the frontned functionality to search for the hotels at the customer end.
-  Implemented the backend functionality for viewing My Bookings at the customer end.
-  Designed the backend APIs for Modify Booking and Cancel Booking at the customer end.
-  Integrated frontend pages and tested API calls.
-  Analyzed the primary goals to be met at every stage of our project in order to keep focused on what was necessary.
+- Prit Lakhani
 
-- Designed frontend functionality for User Login.
-  Created separate NavBar component to be used in all pages.
-  Implemented the frontend functionality for viewing my bookings at the customer end.
-  Ensured communication between teammates throughout the project and maintain sprint task sheet.
-  Helped others to resolve their issues whenever required.
+  - Designed the backend APIs for adding, deleting and updating flights.
+  - Implemented the frontned functionality to display for the flights at the customer end.
+  - Implemented the backend functionality for adding, deleting and updating flights at the customer end.
+  - Designed the backend APIs for assign a random gate at the customer end.
+  - Integrated frontend pages and tested API calls.
+  - Analyzed the primary goals to be met at every stage of our project in order to keep focused on what was necessary.
 
-- Designed the backend APIs for Admin side to add rooms and view users, bookings and rooms.
-  Implemented the backend functionality to add rewards on successful stay.
-  Implemented the frontend functionality for viewing My Bookings at the customer end.
-  Designed the frontend for Modify Booking and Cancel Booking at the customer end.
-  Between sprints gave regular feedback, allowing us to bounce ideas off all our teammates and improve with each sprint.
+- Vishwesh Shah
 
-- Designed Landing page with access to Login and Register.
-  Designed the frontend for Admin side to add rooms and view users, bookings and rooms.
-  Implemented the backend functionality to search for the hotels at the customer end.
-  Designed the frontend for User Profile.
-  Implemented routing on the frontend side.
+  - Designed frontend functionality for Airport employee.
+  - Created separate NavBar component to be used in all pages.
+  - Implemented the frontend functionality for viewing gate details at the employee end.
+  - Developed an APIs for enable/disable one or more gates for maintenance.
+  - Ensured communication between teammates throughout the project and maintain sprint task sheet.
+  - Helped others to resolve their issues whenever required.
+
+- Pravin Ramasamy
+
+  - Designed the backend APIs for login and signup.
+  - Implemented routing on the frontend side.
+  - Implemented the backend functionality to redirect the user based on role (General User, Airport Employee, Airline Employee).
+  - Designed an APIs to assign baggage carosuel number to arriving flights and update the flight details in the database.
+  - Between sprints gave regular feedback, allowing us to bounce ideas off all our teammates and improve with each sprint.
 
 ## Github Project Board
 
 https://github.com/gopinathsjsu/team-project-team-16
-
-## Project Journal
-
-Pravin's Journal
 
 ## Tools and Languages Used
 
@@ -66,23 +63,15 @@ Pravin's Journal
 3. Feedback
 
 - At the end of each sprint, a few minutes were set aside for feedback to discuss whether any team members needed to improve.
-- We found areas for improvement through frequent input and
-
-4. Respect
-
-5. Courage
-
-## Design Pattern
-
-- Strategy Pattern
-- Dependency Injection
-- Decorator Pattern
-- State Pattern
-- Observer Pattern
+- We found areas for improvement through frequent input and revised the practices previously followed.
 
 ## Architecture Diagram
 
 ![ArchitectureDiagram](https://user-images.githubusercontent.com/99626312/205467571-a12fe2f4-637a-4002-83a2-f12977bcca38.jpeg)
+
+## Class Diagram
+
+![Class Diagram]()
 
 ## Deployment Diagram
 
@@ -92,42 +81,33 @@ Pravin's Journal
 
 ![WireFrame](https://user-images.githubusercontent.com/99626312/205468790-a872d9c3-e76b-40ce-b00b-7dbcd3b23990.png)
 
-## Scrum
+### Link to team's GitHub Repo
 
-- 1 Week Scrums
+### Link to team's Project Board
 
-## Design Decision
+### Link to team's Project Journal
 
-For Backend:
-NodeJs - Node.js is easily employed as a server-side proxy where it can handle a large amount of simultaneous connections in a non-blocking manner. It is especially useful for proxying different services with varying response times, or collecting data from multiple source points
+### Link to team's Google Sprint Task Sheet
 
-For Frontend:
-React and Redux : Using React to make the ui/ux development easier, making components of the application. Introduced redux into the application to manage global state of the application, redux helps applications like SPA to transfer and manage UI states from one component to another.
+### Week Wise Design Decisions
 
-For UI Library:
-Mantine UI: Used Mantine UI to make UI/UX development easier, help in managing the states of the UI and also help in development of robust UI. It also helps manage modal system and notifications system.
+1. Technologies to be used for frontend - Vannilla HTML, CSS, Bootstrap, React JS, Ant Design or Material UI?
+2. Technologies to use for the backend - Python Flask, Java Spring Boot or Node JS?
+3. Database to be used - MySQL or MongoDB
+4. Design patterns to use - Decided to use Chain of Responsibility and Strategy Patterns
+5. Rewards generation strategies- factors affecting rewards, when they change, events triggering them and much more.
+6. Dynamic Pricing Strategies - How weekday, weekends, national holidays and festive seasons will contribute to the booking price of day?
+7. Testing Strategies - Tools to be used and which APIs to test?
+8. Cloud Services strategies- AWS or Heroku, ECR or EC2 deployment and cloud related decisions?
 
-For Database/ORM:
-MySQL: MySQL provides comprehensive support for this application development. It also supports for the stored procedures, triggers, functions, views if needed. The structure of the table which is to be used is going to be structured and well defined and so MySQL would be suitable database to be used.
+### Feature set
 
-DB Design use cases to keep in mind:
-
-1. 3 categories of users: Airlines employee, Airport Employee, Users to access the System with role based authentication
-2. Retrieve Flight arrivals and departure and get assignments based on time.
-3. Implement a random gate assignment for arriving and departure flights- designed to prevent conflict assignments.
-4. Airport Employees: Enable or disable one or more gates for maintenance
-5. Airport Employees: Assign baggage carousel number to arriving flights - the system should prevent conflicting assignments
-6. Display Baggage claim information will be displayed in multiple monitors in the arrival area.
-7. Airline Employees: Add or update the schedule of flights belonging to their airline relevant to that airport
-
-## Deliverables
-
-### Deliverables For Sprint 1: (Sep 22 to Oct 6)
-
-### Deliverables For Sprint 2: (Oct 7 to Oct 20)
-
-### Deliverables For Sprint 3: (Oct 21 to Nov 3)
-
-### Deliverables For Sprint 4: (Nov 4 to Nov 17)
-
-### Deliverables For Sprint 5: (Nov 18 to Nov 30)
+1. 3 personas: Airlines Employee, Airport Employee, General Users to access the system with role based authentication.
+2. All Users :
+   - Retrieve flights (for next 1 hour, 2 hour and 4 hour) arrivals and departures with updated details.
+3. Airline Employee :
+   - Add, update and delete flights belonging to their airline relevant to that airport.
+   - A random gate assignment for arriving and departure flights - designed to prevent conflict assignments.
+4. Airport Employees:
+   - Enable or disable one or more gates for maintenance.
+   - Assign baggage carousel number to arriving flights - the system should prevent conflicting assignments.

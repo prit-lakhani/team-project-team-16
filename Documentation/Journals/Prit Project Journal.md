@@ -56,7 +56,7 @@ Sprint 5: 10/30/2022 - 11/05/2022
 
 - Weekly Scrum Report
   - What tasks did I work on / complete?
-    1. Developed an APIs to delete and upadate the flight.
+    1. Developed an APIs to delete and update the flight.
     2. Developed API to fetch flight based on the times (Next 1 hour, 2 hour and 4 hour).
   - What am I planning to work on next?
     1. To display filghts based on flight type (Arrivals, and departures).
@@ -72,7 +72,7 @@ Sprint 6: 11/06/2022 - 11/12/2022
     1. Completed add flight functionality and display flights based on user needs.
   - What am I planning to work on next?
     1. Develope an API to assign random gate to each flights.
-    2. Gate Assignments and updated the flight details with assigned gate number.
+    2. Gate Assignments and update the flight details with assigned gate number.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
@@ -83,7 +83,7 @@ Sprint 7: 11/13/2022 - 11/19/2022
 - Weekly Scrum Report
   - What tasks did I work on / complete?
     1. Implemented Random Gate Assignemtn API manually from server side.
-    2. Integrated Gate Assignemt API with frontend.
+    2. Integrated Gate Assigment API with frontend.
     3. Display flight details with assign gate number.
   - What am I planning to work on next?
     1. Testing the application with end to end testing.
