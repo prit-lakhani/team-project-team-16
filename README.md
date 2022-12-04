@@ -1,6 +1,6 @@
 # Flight Management System by Team - 16
 
-## Team members/Contributors:
+## Team members:
 
 - Pravin Ramasamy Balachandran
 - Prit Lakhani
