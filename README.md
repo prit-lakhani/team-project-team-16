@@ -99,7 +99,7 @@ https://docs.google.com/spreadsheets/d/1QBUD3UliFP4POEnYaCWp6dhYJzGkTVYBfCzc2Dva
 
 ### Week Wise Design Decisions
 
-1. Technologies to be used for frontend - Vannilla HTML, CSS, Bootstrap, React JS, React-bootstrap or Material UI?
+1. Technologies to be used for frontend - HTML, CSS, Bootstrap, React JS, React-bootstrap or Material UI?
 2. Technologies to use for the backend - Python Flask, Java Spring Boot or Node JS?
 3. Database to be used - MySQL or MongoDB
 4. Design patterns to use - Decided to use Chain of Responsibility and Strategy Patterns
