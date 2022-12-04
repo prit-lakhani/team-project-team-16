@@ -79,13 +79,17 @@ Pravin's Journal
 
 ## Architecture Diagram
 
+![ArchitectureDiagram](https://user-images.githubusercontent.com/99626312/205467571-a12fe2f4-637a-4002-83a2-f12977bcca38.jpeg)
 
 
-## DB Design
+## Deployment Diagram
+
+![DeploymentDiagram](https://user-images.githubusercontent.com/99626312/205467579-d628acbb-ee1f-4f75-9018-ce730047d11c.jpeg)
 
 
+## UI Wireframe
 
-## Use Case Diagram
+![WireFrame](https://user-images.githubusercontent.com/99626312/205468166-8ab4cb40-932a-4b6e-ad8b-a2444e856be4.png)
 
 
 ## Scrum
