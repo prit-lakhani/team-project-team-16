@@ -36,6 +36,7 @@ router.post("/allbaggages", async (req, res) => {
         message: " Carosuel is already added in the database",
       });
     }
+    //adding gate details in the db
     await AllBaggageCaros.insertMany(data)
       .then(() => {
         console.log("Data inserted"); // Success
