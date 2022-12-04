@@ -46,7 +46,7 @@ Sprint 4: 10/23/2022 - 10/29/2022
     1. Designed flight list table based on the flight type (Arrivals and Departures).
     2. Modified add flight API.
   - What am I planning to work on next?
-  1. Develop an APIs to delete and update the time.
+  1. Develop an APIs to delete and update the flight.
   - What tasks are blocked waiting on another team member?
     1. None
 - Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
