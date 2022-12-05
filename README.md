@@ -111,7 +111,7 @@ https://docs.google.com/spreadsheets/d/1QBUD3UliFP4POEnYaCWp6dhYJzGkTVYBfCzc2Dva
 
 ### Feature set
 
-1. 3 personas: Airlines Employee, Airport Employee, General Users to access the system with role based authentication.
+1. 3 Personas: Airlines Employee, Airport Employee, General Users to access the system with role based authentication.
 2. All Users :
    - Retrieve flights (for next 1 hour, 2 hour and 4 hour) arrivals and departures including updated gate details, baggage carousel number for arriving file.
 3. Airline Employee :
